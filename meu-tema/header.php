@@ -39,14 +39,3 @@
             </button>
         </div>
     </header><!-- #masthead -->
-
-    <?php
-    // Breadcrumbs (apenas se não for a página inicial)
-    if (!is_front_page()) {
-        echo '<div class="breadcrumbs-container">';
-        echo '<div class="container">';
-        mbo_advocacia_breadcrumbs();
-        echo '</div>';
-        echo '</div>';
-    }
-    ?>

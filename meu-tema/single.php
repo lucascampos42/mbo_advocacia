@@ -11,19 +11,6 @@ get_header(); ?>
         <div class="content-area">
             <div class="main-content">
                 <?php while (have_posts()) : the_post(); ?>
-                    
-                    <!-- Breadcrumbs para navegação -->
-                    <nav class="article-breadcrumbs">
-                        <a href="<?php echo esc_url(home_url('/')); ?>">Início</a>
-                        <span class="separator">></span>
-                        <a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>">Notícias</a>
-                        <?php if (has_category()) : ?>
-                            <span class="separator">></span>
-                            <?php the_category(' > '); ?>
-                        <?php endif; ?>
-                        <span class="separator">></span>
-                        <span class="current"><?php the_title(); ?></span>
-                    </nav>
 
                     <article id="post-<?php the_ID(); ?>" <?php post_class('post single-post article-content'); ?>>
                         <header class="post-header">

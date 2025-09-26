@@ -400,6 +400,18 @@
                     <h3>Envie sua Mensagem</h3>
                     <p>Preencha o formulário abaixo e entraremos em contato em breve.</p>
                     
+                    <?php if (isset($_GET['contact'])): ?>
+                        <?php if ($_GET['contact'] == 'success'): ?>
+                            <div class="contact-message success">
+                                <p>✅ <strong>Mensagem enviada com sucesso!</strong> Entraremos em contato em breve.</p>
+                            </div>
+                        <?php elseif ($_GET['contact'] == 'error'): ?>
+                            <div class="contact-message error">
+                                <p>❌ <strong>Erro ao enviar mensagem.</strong> Tente novamente ou entre em contato por telefone.</p>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    
                     <form class="contact-form-wrapper" method="post" action="">
                         <?php wp_nonce_field('mbo_contact_form', 'mbo_contact_nonce'); ?>
                         

@@ -50,10 +50,7 @@ body {
     padding-top: 0;
 }
 
-/* Garante que não há espaçamento extra no breadcrumbs */
-.breadcrumbs-container {
-    display: none;
-}
+
 
 /* Container principal */
 .container {
@@ -1580,6 +1577,31 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     line-height: 1.6;
 }
 
+/* Mensagens de Feedback do Formulário */
+.contact-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid;
+}
+
+.contact-message.success {
+    background-color: rgba(34, 197, 94, 0.1);
+    border-left-color: #22c55e;
+    color: #22c55e;
+}
+
+.contact-message.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left-color: #ef4444;
+    color: #ef4444;
+}
+
+.contact-message p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
 .contact-form-wrapper {
     display: flex;
     flex-direction: column;
@@ -2110,7 +2132,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 /* Botão Flutuante Voltar ao Topo */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: 100px; /* Posicionado acima do botão WhatsApp */
     right: 30px;
     width: 50px;
     height: 50px;
@@ -2157,7 +2179,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 /* Responsividade do botão */
 @media (max-width: 768px) {
     .back-to-top {
-        bottom: 20px;
+        bottom: 85px; /* Posicionado acima do botão WhatsApp em mobile */
         right: 20px;
         width: 45px;
         height: 45px;
@@ -2169,4 +2191,211 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* Forçar atualização do tema - versão 1.0.2 */
+@media (max-width: 480px) {
+    .back-to-top {
+        bottom: 80px; /* Posicionado acima do botão WhatsApp em telas pequenas */
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 360px) {
+    .back-to-top {
+        bottom: 75px; /* Ajuste para telas muito pequenas */
+        right: 15px;
+    }
+}
+
+/* ===== BOTÃO FLUTUANTE DO WHATSAPP ===== */
+
+.whatsapp-float {
+    position: fixed;
+    z-index: 9999;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+    animation: whatsappFadeIn 0.5s ease forwards 1s;
+}
+
+.whatsapp-float.bottom-right {
+    bottom: 30px; /* Posição inferior - abaixo do botão "voltar ao topo" */
+    right: 30px;
+}
+
+.whatsapp-float.bottom-left {
+    bottom: 30px; /* Posição inferior - abaixo do botão "voltar ao topo" */
+    left: 30px;
+}
+
+.whatsapp-link {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 14px;
+    max-width: 200px;
+    overflow: hidden;
+}
+
+.whatsapp-link:hover {
+    background: linear-gradient(135deg, #128C7E, #25D366);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+    color: white;
+    text-decoration: none;
+}
+
+.whatsapp-link:focus {
+    outline: 2px solid #25D366;
+    outline-offset: 2px;
+}
+
+.whatsapp-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.whatsapp-text {
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    opacity: 1;
+    max-width: 150px;
+}
+
+/* Animação de entrada */
+@keyframes whatsappFadeIn {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Animação de pulso sutil */
+@keyframes whatsappPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.whatsapp-float:hover .whatsapp-link {
+    animation: whatsappPulse 0.6s ease-in-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .whatsapp-float.bottom-right {
+        bottom: 20px; /* Posição inferior em mobile */
+        right: 20px;
+    }
+    
+    .whatsapp-float.bottom-left {
+        bottom: 20px; /* Posição inferior em mobile */
+        left: 20px;
+    }
+    
+    .whatsapp-link {
+        padding: 10px 16px;
+        font-size: 13px;
+        max-width: 160px;
+    }
+    
+    .whatsapp-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+    
+    .whatsapp-text {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-float.bottom-right,
+    .whatsapp-float.bottom-left {
+        bottom: 15px; /* Posição inferior em telas pequenas */
+        right: 15px;
+        left: auto;
+    }
+    
+    .whatsapp-link {
+        padding: 8px 12px;
+        font-size: 12px;
+        max-width: 140px;
+        border-radius: 40px;
+    }
+    
+    .whatsapp-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+    }
+    
+    .whatsapp-text {
+        max-width: 100px;
+        font-size: 12px;
+    }
+}
+
+/* Versão compacta para telas muito pequenas */
+@media (max-width: 360px) {
+    .whatsapp-link {
+        padding: 10px;
+        border-radius: 50%;
+        max-width: 44px;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+    }
+    
+    .whatsapp-text {
+        display: none;
+    }
+    
+    .whatsapp-icon {
+        margin-right: 0;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Estados de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    .whatsapp-float,
+    .whatsapp-link,
+    .whatsapp-text,
+    .whatsapp-icon {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* Forçar atualização do tema - versão 1.0.3 */

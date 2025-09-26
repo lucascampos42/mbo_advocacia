@@ -163,6 +163,24 @@ function mbo_advocacia_scripts() {
     // Script de animação do contador
     wp_enqueue_script('mbo-advocacia-counter-animation', get_template_directory_uri() . '/assets/js/counter-animation.js', array(), '1.0.0', true);
 
+    // Script de validação de formulário (apenas na página inicial)
+    if (is_front_page()) {
+        wp_enqueue_script('mbo-advocacia-form-validation', get_template_directory_uri() . '/assets/js/form-validation.js', array('jquery'), '1.0.0', true);
+    }
+
+    // Script do botão WhatsApp (se habilitado)
+    if (get_theme_mod('mbo_whatsapp_enable', false)) {
+        wp_enqueue_script('mbo-advocacia-whatsapp', get_template_directory_uri() . '/assets/js/whatsapp-button.js', array('jquery'), '1.0.0', true);
+        
+        // Passa as configurações do WhatsApp para o JavaScript
+        wp_localize_script('mbo-advocacia-whatsapp', 'whatsappData', array(
+            'number' => get_theme_mod('mbo_whatsapp_number', '5531999999999'),
+            'message' => get_theme_mod('mbo_whatsapp_message', 'Olá! Gostaria de agendar uma consulta jurídica.'),
+            'buttonText' => get_theme_mod('mbo_whatsapp_button_text', 'Fale Conosco'),
+            'position' => get_theme_mod('mbo_whatsapp_position', 'bottom-right')
+        ));
+    }
+
     // Script para comentários
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -230,29 +248,7 @@ function mbo_advocacia_post_navigation() {
     }
 }
 
-/**
- * Adiciona suporte a breadcrumbs simples
- */
-function mbo_advocacia_breadcrumbs() {
-    if (!is_home() && !is_front_page()) {
-        echo '<nav class="breadcrumbs">';
-        echo '<a href="' . home_url() . '">Início</a>';
-        
-        if (is_category() || is_single()) {
-            echo ' &raquo; ';
-            the_category(' &raquo; ');
-            if (is_single()) {
-                echo ' &raquo; ';
-                the_title();
-            }
-        } elseif (is_page()) {
-            echo ' &raquo; ';
-            the_title();
-        }
-        
-        echo '</nav>';
-    }
-}
+
 
 /**
  * Adiciona meta tags personalizadas
@@ -1074,6 +1070,75 @@ function mbo_advocacia_customize_register($wp_customize) {
         'section' => 'mbo_footer_section',
         'type'    => 'textarea',
     ));
+
+    // === SEÇÃO DO WHATSAPP ===
+    $wp_customize->add_section('mbo_whatsapp_section', array(
+        'title'    => __('Configurações do WhatsApp', 'mbo-advocacia'),
+        'priority' => 41,
+    ));
+
+    // Ativar/Desativar Botão do WhatsApp
+    $wp_customize->add_setting('mbo_whatsapp_enable', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('mbo_whatsapp_enable', array(
+        'label'       => __('Exibir Botão do WhatsApp', 'mbo-advocacia'),
+        'description' => __('Ativa ou desativa o botão flutuante do WhatsApp no site', 'mbo-advocacia'),
+        'section'     => 'mbo_whatsapp_section',
+        'type'        => 'checkbox',
+    ));
+
+    // Número do WhatsApp
+    $wp_customize->add_setting('mbo_whatsapp_number', array(
+        'default'           => '5531999999999',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_whatsapp_number', array(
+        'label'       => __('Número do WhatsApp', 'mbo-advocacia'),
+        'description' => __('Digite o número com código do país e DDD (ex: 5531999999999)', 'mbo-advocacia'),
+        'section'     => 'mbo_whatsapp_section',
+        'type'        => 'text',
+    ));
+
+    // Mensagem Padrão
+    $wp_customize->add_setting('mbo_whatsapp_message', array(
+        'default'           => 'Olá! Gostaria de agendar uma consulta jurídica.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_whatsapp_message', array(
+        'label'       => __('Mensagem Padrão', 'mbo-advocacia'),
+        'description' => __('Mensagem que será enviada automaticamente quando o usuário clicar no botão', 'mbo-advocacia'),
+        'section'     => 'mbo_whatsapp_section',
+        'type'        => 'textarea',
+    ));
+
+    // Texto do Botão
+    $wp_customize->add_setting('mbo_whatsapp_button_text', array(
+        'default'           => 'Fale Conosco',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_whatsapp_button_text', array(
+        'label'       => __('Texto do Botão', 'mbo-advocacia'),
+        'description' => __('Texto que aparece ao lado do ícone do WhatsApp', 'mbo-advocacia'),
+        'section'     => 'mbo_whatsapp_section',
+        'type'        => 'text',
+    ));
+
+    // Posição do Botão
+    $wp_customize->add_setting('mbo_whatsapp_position', array(
+        'default'           => 'bottom-right',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_whatsapp_position', array(
+        'label'   => __('Posição do Botão', 'mbo-advocacia'),
+        'section' => 'mbo_whatsapp_section',
+        'type'    => 'select',
+        'choices' => array(
+            'bottom-right' => __('Inferior Direito', 'mbo-advocacia'),
+            'bottom-left'  => __('Inferior Esquerdo', 'mbo-advocacia'),
+        ),
+    ));
 }
 add_action('customize_register', 'mbo_advocacia_customize_register');
 
@@ -1090,7 +1155,7 @@ function mbo_process_contact_form() {
         
         // Validação básica
         if (empty($name) || empty($email) || empty($subject) || empty($message)) {
-            wp_die('Por favor, preencha todos os campos obrigatórios.');
+            wp_die('Por favor, preencha todos os campos obrigatórios.', 'Erro no Formulário', array('back_link' => true));
         }
         
         // Preparar e-mail
