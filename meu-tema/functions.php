@@ -136,8 +136,14 @@ add_action('widgets_init', 'mbo_advocacia_widgets_init');
  * Enfileira scripts e estilos
  */
 function mbo_advocacia_scripts() {
-    // Estilo principal
-    wp_enqueue_style('mbo-advocacia-style', get_stylesheet_uri(), array(), '1.0.0');
+    // Estilo principal do tema
+    wp_enqueue_style('mbo-advocacia-style', get_stylesheet_uri(), array(), '1.0.1');
+
+    // Bootstrap CSS
+    wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', array(), '5.3.3');
+
+    // Estilo personalizado
+    wp_enqueue_style('mbo-advocacia-custom', get_template_directory_uri() . '/assets/css/custom.css', array('bootstrap-css'), '1.0.0');
 
     // Font Awesome para ícones
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', array(), '6.0.0');
@@ -145,8 +151,11 @@ function mbo_advocacia_scripts() {
     // Google Fonts
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap', array(), null);
 
+    // Bootstrap JS
+    wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '5.3.3', true);
+
     // Script principal do tema
-    wp_enqueue_script('mbo-advocacia-script', get_template_directory_uri() . '/js/main.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('mbo-advocacia-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery', 'bootstrap-js'), '1.0.1', true);
 
     // Script para comentários
     if (is_singular() && comments_open() && get_option('thread_comments')) {
