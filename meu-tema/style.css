@@ -1519,7 +1519,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 0.6rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     border: 1px solid rgba(212, 175, 55, 0.2);
@@ -1916,13 +1916,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-align: left;
+    text-align: center;
     width: 100%;
-}
-
-/* Estilo específico para o título do primeiro widget */
-.footer-widget-1 h4.widget-title {
-    align-self: flex-start;
 }
 
 .footer-subtitle {
@@ -1970,8 +1965,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 .footer-contact .contact-icon {
     color: #C8A96E;
     flex-shrink: 0;
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
 }
 
 .footer-contact .contact-details {

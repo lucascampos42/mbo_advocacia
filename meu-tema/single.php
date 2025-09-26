@@ -1,17 +1,38 @@
 <?php
 /**
  * Template para exibir posts individuais
+ * MBO Advocacia - Design personalizado para notícias individuais
  */
 
 get_header(); ?>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main single-news">
     <div class="container">
         <div class="content-area">
             <div class="main-content">
                 <?php while (have_posts()) : the_post(); ?>
-                    <article id="post-<?php the_ID(); ?>" <?php post_class('post single-post'); ?>>
+                    
+                    <!-- Breadcrumbs para navegação -->
+                    <nav class="article-breadcrumbs">
+                        <a href="<?php echo esc_url(home_url('/')); ?>">Início</a>
+                        <span class="separator">></span>
+                        <a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>">Notícias</a>
+                        <?php if (has_category()) : ?>
+                            <span class="separator">></span>
+                            <?php the_category(' > '); ?>
+                        <?php endif; ?>
+                        <span class="separator">></span>
+                        <span class="current"><?php the_title(); ?></span>
+                    </nav>
+
+                    <article id="post-<?php the_ID(); ?>" <?php post_class('post single-post article-content'); ?>>
                         <header class="post-header">
+                            <div class="post-categories">
+                                <?php if (has_category()) : ?>
+                                    <?php the_category(' '); ?>
+                                <?php endif; ?>
+                            </div>
+                            
                             <h1 class="post-title"><?php the_title(); ?></h1>
                             
                             <div class="post-meta">
@@ -35,17 +56,6 @@ get_header(); ?>
                                     <span class="cat-links">
                                         <i class="fa fa-folder"></i>
                                         <?php the_category(', '); ?>
-                                    </span>
-                                <?php endif; ?>
-                                
-                                <?php if (comments_open() || get_comments_number()) : ?>
-                                    <span class="comments-link">
-                                        <i class="fa fa-comments"></i>
-                                        <?php comments_popup_link(
-                                            esc_html__('Deixe um comentário', 'mbo-advocacia'),
-                                            esc_html__('1 Comentário', 'mbo-advocacia'),
-                                            esc_html__('% Comentários', 'mbo-advocacia')
-                                        ); ?>
                                     </span>
                                 <?php endif; ?>
                             </div>
@@ -100,20 +110,91 @@ get_header(); ?>
                         </footer>
                     </article>
 
+                    <!-- Navegação entre posts melhorada -->
+                    <nav class="post-navigation">
+                        <div class="nav-links">
+                            <?php
+                            $prev_post = get_previous_post();
+                            $next_post = get_next_post();
+                            ?>
+                            
+                            <?php if ($prev_post) : ?>
+                                <div class="nav-previous">
+                                    <a href="<?php echo esc_url(get_permalink($prev_post->ID)); ?>" class="nav-link">
+                                        <span class="nav-direction">
+                                            <i class="fa fa-chevron-left"></i> Anterior
+                                        </span>
+                                        <span class="nav-title"><?php echo esc_html($prev_post->post_title); ?></span>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <?php if ($next_post) : ?>
+                                <div class="nav-next">
+                                    <a href="<?php echo esc_url(get_permalink($next_post->ID)); ?>" class="nav-link">
+                                        <span class="nav-direction">
+                                            Próximo <i class="fa fa-chevron-right"></i>
+                                        </span>
+                                        <span class="nav-title"><?php echo esc_html($next_post->post_title); ?></span>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </nav>
+
+                    <!-- Artigos Relacionados -->
                     <?php
-                    // Navegação entre posts
-                    mbo_advocacia_post_navigation();
-                    
-                    // Comentários
-                    if (comments_open() || get_comments_number()) :
-                        comments_template();
-                    endif;
+                    $categories = get_the_category();
+                    if ($categories) {
+                        $category_ids = array();
+                        foreach ($categories as $category) {
+                            $category_ids[] = $category->term_id;
+                        }
+                        
+                        $related_posts = get_posts(array(
+                            'category__in' => $category_ids,
+                            'post__not_in' => array(get_the_ID()),
+                            'posts_per_page' => 3,
+                            'orderby' => 'rand'
+                        ));
+                        
+                        if ($related_posts) :
                     ?>
+                        <section class="related-articles">
+                            <h3 class="related-title">Artigos Relacionados</h3>
+                            <div class="related-grid">
+                                <?php foreach ($related_posts as $post) : setup_postdata($post); ?>
+                                    <article class="related-article">
+                                        <?php if (has_post_thumbnail()) : ?>
+                                            <div class="related-thumbnail">
+                                                <a href="<?php echo esc_url(get_permalink()); ?>">
+                                                    <?php the_post_thumbnail('medium', array('class' => 'related-image')); ?>
+                                                </a>
+                                            </div>
+                                        <?php endif; ?>
+                                        
+                                        <div class="related-content">
+                                            <h4 class="related-article-title">
+                                                <a href="<?php echo esc_url(get_permalink()); ?>">
+                                                    <?php the_title(); ?>
+                                                </a>
+                                            </h4>
+                                            <span class="related-date">
+                                                <?php echo esc_html(get_the_date('d/m/Y')); ?>
+                                            </span>
+                                        </div>
+                                    </article>
+                                <?php endforeach; wp_reset_postdata(); ?>
+                            </div>
+                        </section>
+                    <?php 
+                        endif;
+                    }
+                    ?>
+
 
                 <?php endwhile; ?>
             </div>
-
-            <?php get_sidebar(); ?>
         </div>
     </div>
 </main>

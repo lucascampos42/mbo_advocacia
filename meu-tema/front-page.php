@@ -35,20 +35,17 @@
                 
                 <!-- Botões de Ação -->
                 <div class="hero-buttons">
-                    <a href="#contato" class="btn btn-primary">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 5C3 3.89543 3.89543 3 5 3H8.27924C8.70967 3 9.09181 3.27543 9.22792 3.68377L10.7257 8.17721C10.8831 8.64932 10.6694 9.16531 10.2243 9.38787L7.96701 10.5165C9.06925 12.9612 11.0388 14.9308 13.4835 16.033L14.6121 13.7757C14.8347 13.3306 15.3507 13.1169 15.8228 13.2743L20.3162 14.7721C20.7246 14.9082 21 15.2903 21 15.7208V19C21 20.1046 20.1046 21 19 21H18C9.71573 21 3 14.2843 3 6V5Z" fill="currentColor"/>
-                        </svg>
-                        <?php echo esc_html(get_theme_mod('mbo_primary_button_text', 'Consulta Gratuita')); ?>
-                    </a>
+                    <?php if (get_theme_mod('mbo_primary_button_enable', true)) : ?>
+                        <a href="<?php echo esc_url(get_theme_mod('mbo_primary_button_link', '#contato')); ?>" class="btn btn-primary">
+                            <?php echo esc_html(get_theme_mod('mbo_primary_button_text', 'Consulta Gratuita')); ?>
+                        </a>
+                    <?php endif; ?>
                     
-                    <a href="#sobre" class="btn btn-secondary">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" fill="none"/>
-                        </svg>
-                        <?php echo esc_html(get_theme_mod('mbo_secondary_button_text', 'Fale Conosco')); ?>
-                    </a>
+                    <?php if (get_theme_mod('mbo_secondary_button_enable', true)) : ?>
+                        <a href="<?php echo esc_url(get_theme_mod('mbo_secondary_button_link', '#sobre')); ?>" class="btn btn-secondary">
+                            <?php echo esc_html(get_theme_mod('mbo_secondary_button_text', 'Fale Conosco')); ?>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -276,6 +273,18 @@
                     </p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Seção de FAQ -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-subtitle">Tire suas dúvidas sobre nossos serviços jurídicos</p>
+            </div>
+            
+            <?php echo do_shortcode('[mbo_faq]'); ?>
         </div>
     </section>
 

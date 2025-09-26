@@ -160,6 +160,9 @@ function mbo_advocacia_scripts() {
     // Script de rolagem suave
     wp_enqueue_script('mbo-advocacia-smooth-scroll', get_template_directory_uri() . '/assets/js/smooth-scroll.js', array('mbo-advocacia-script'), '1.0.0', true);
 
+    // Script de animação do contador
+    wp_enqueue_script('mbo-advocacia-counter-animation', get_template_directory_uri() . '/assets/js/counter-animation.js', array(), '1.0.0', true);
+
     // Script para comentários
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -355,7 +358,7 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_Menu
 
     function start_lvl(&$output, $depth = 0, $args = null)
     {
-        $dropdown_menu_classes[] = '';
+        $dropdown_menu_classes[] = "";
         foreach($this->current_item->classes as $class) {
             if(in_array($class, $this->dropdown_menu_alignment_values)) {
                 $dropdown_menu_classes[] = $class;
@@ -477,6 +480,19 @@ function mbo_advocacia_customize_register($wp_customize) {
         'type'    => 'textarea',
     ));
 
+    // === BOTÃO PRIMÁRIO ===
+    
+    // Ativar/Desativar Botão Primário
+    $wp_customize->add_setting('mbo_primary_button_enable', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('mbo_primary_button_enable', array(
+        'label'   => __('Exibir Botão Primário', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'checkbox',
+    ));
+
     // Texto do Botão Primário
     $wp_customize->add_setting('mbo_primary_button_text', array(
         'default'           => 'Consulta Gratuita',
@@ -488,6 +504,31 @@ function mbo_advocacia_customize_register($wp_customize) {
         'type'    => 'text',
     ));
 
+    // Link do Botão Primário
+    $wp_customize->add_setting('mbo_primary_button_link', array(
+        'default'           => '#contato',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('mbo_primary_button_link', array(
+        'label'       => __('Link do Botão Primário', 'mbo-advocacia'),
+        'description' => __('URL para onde o botão deve levar (ex: #contato, /contato, https://wa.me/5531999999999)', 'mbo-advocacia'),
+        'section'     => 'mbo_homepage_section',
+        'type'        => 'url',
+    ));
+
+    // === BOTÃO SECUNDÁRIO ===
+    
+    // Ativar/Desativar Botão Secundário
+    $wp_customize->add_setting('mbo_secondary_button_enable', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('mbo_secondary_button_enable', array(
+        'label'   => __('Exibir Botão Secundário', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'checkbox',
+    ));
+
     // Texto do Botão Secundário
     $wp_customize->add_setting('mbo_secondary_button_text', array(
         'default'           => 'Fale Conosco',
@@ -497,6 +538,18 @@ function mbo_advocacia_customize_register($wp_customize) {
         'label'   => __('Texto do Botão Secundário', 'mbo-advocacia'),
         'section' => 'mbo_homepage_section',
         'type'    => 'text',
+    ));
+
+    // Link do Botão Secundário
+    $wp_customize->add_setting('mbo_secondary_button_link', array(
+        'default'           => '#sobre',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('mbo_secondary_button_link', array(
+        'label'       => __('Link do Botão Secundário', 'mbo-advocacia'),
+        'description' => __('URL para onde o botão deve levar (ex: #sobre, /sobre, mailto:contato@exemplo.com)', 'mbo-advocacia'),
+        'section'     => 'mbo_homepage_section',
+        'type'        => 'url',
     ));
 
     // === SEÇÃO SOBRE ===
@@ -1000,5 +1053,260 @@ function mbo_process_contact_form() {
     }
 }
 add_action('init', 'mbo_process_contact_form');
+
+/**
+ * Desativar comentários globalmente
+ */
+// Desativar comentários para todos os posts
+function mbo_disable_comments_post_types_support() {
+    remove_post_type_support('post', 'comments');
+    remove_post_type_support('page', 'comments');
+}
+add_action('init', 'mbo_disable_comments_post_types_support');
+
+// Fechar comentários no frontend
+function mbo_disable_comments_status() {
+    return false;
+}
+add_filter('comments_open', 'mbo_disable_comments_status', 20, 2);
+add_filter('pings_open', 'mbo_disable_comments_status', 20, 2);
+
+// Ocultar comentários existentes
+function mbo_disable_comments_hide_existing_comments($comments) {
+    $comments = array();
+    return $comments;
+}
+add_filter('comments_array', 'mbo_disable_comments_hide_existing_comments', 10, 2);
+
+// Remover menu de comentários do admin
+function mbo_disable_comments_admin_menu() {
+    remove_menu_page('edit-comments.php');
+}
+add_action('admin_menu', 'mbo_disable_comments_admin_menu');
+
+// Redirecionar tentativas de acesso à página de comentários
+function mbo_disable_comments_admin_menu_redirect() {
+    global $pagenow;
+    if ($pagenow === 'edit-comments.php') {
+        wp_redirect(admin_url());
+        exit;
+    }
+}
+add_action('admin_init', 'mbo_disable_comments_admin_menu_redirect');
+
+// Remover widget de comentários do dashboard
+function mbo_disable_comments_dashboard() {
+    remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+}
+add_action('admin_init', 'mbo_disable_comments_dashboard');
+
+/**
+ * Custom Post Type para FAQ
+ */
+function mbo_register_faq_post_type() {
+    $labels = array(
+        'name'                  => 'FAQs',
+        'singular_name'         => 'FAQ',
+        'menu_name'             => 'Perguntas Frequentes',
+        'name_admin_bar'        => 'FAQ',
+        'archives'              => 'Arquivo de FAQs',
+        'attributes'            => 'Atributos do FAQ',
+        'parent_item_colon'     => 'FAQ Pai:',
+        'all_items'             => 'Todas as Perguntas',
+        'add_new_item'          => 'Adicionar Nova Pergunta',
+        'add_new'               => 'Adicionar Nova',
+        'new_item'              => 'Nova Pergunta',
+        'edit_item'             => 'Editar Pergunta',
+        'update_item'           => 'Atualizar Pergunta',
+        'view_item'             => 'Ver Pergunta',
+        'view_items'            => 'Ver Perguntas',
+        'search_items'          => 'Buscar Perguntas',
+        'not_found'             => 'Nenhuma pergunta encontrada',
+        'not_found_in_trash'    => 'Nenhuma pergunta encontrada na lixeira',
+        'featured_image'        => 'Imagem Destacada',
+        'set_featured_image'    => 'Definir imagem destacada',
+        'remove_featured_image' => 'Remover imagem destacada',
+        'use_featured_image'    => 'Usar como imagem destacada',
+        'insert_into_item'      => 'Inserir na pergunta',
+        'uploaded_to_this_item' => 'Enviado para esta pergunta',
+        'items_list'            => 'Lista de perguntas',
+        'items_list_navigation' => 'Navegação da lista de perguntas',
+        'filter_items_list'     => 'Filtrar lista de perguntas',
+    );
+
+    $args = array(
+        'label'                 => 'FAQ',
+        'description'           => 'Perguntas Frequentes',
+        'labels'                => $labels,
+        'supports'              => array('title', 'editor', 'page-attributes'),
+        'hierarchical'          => false,
+        'public'                => false,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 25,
+        'menu_icon'             => 'dashicons-editor-help',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => false,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => true,
+        'publicly_queryable'    => false,
+        'capability_type'       => 'post',
+        'show_in_rest'          => false,
+    );
+
+    register_post_type('faq', $args);
+}
+add_action('init', 'mbo_register_faq_post_type', 0);
+
+/**
+ * Adicionar campos personalizados para FAQ
+ */
+function mbo_add_faq_meta_boxes() {
+    add_meta_box(
+        'faq_answer',
+        'Resposta da Pergunta',
+        'mbo_faq_answer_callback',
+        'faq',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'mbo_add_faq_meta_boxes');
+
+function mbo_faq_answer_callback($post) {
+    wp_nonce_field('mbo_faq_answer_nonce', 'faq_answer_nonce');
+    $answer = get_post_meta($post->ID, '_faq_answer', true);
+    
+    echo '<div style="margin: 10px 0;">';
+    echo '<label for="faq_answer"><strong>Resposta:</strong></label><br>';
+    wp_editor($answer, 'faq_answer', array(
+        'textarea_name' => 'faq_answer',
+        'media_buttons' => false,
+        'textarea_rows' => 8,
+        'teeny' => true,
+        'quicktags' => false
+    ));
+    echo '</div>';
+    
+    echo '<div style="margin: 15px 0; padding: 10px; background: #f0f8ff; border-left: 4px solid #0073aa;">';
+    echo '<strong>💡 Dica:</strong> Use o campo "Ordem" na lateral direita para definir a sequência das perguntas.';
+    echo '</div>';
+}
+
+function mbo_save_faq_meta($post_id) {
+    if (!isset($_POST['faq_answer_nonce']) || !wp_verify_nonce($_POST['faq_answer_nonce'], 'mbo_faq_answer_nonce')) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    if (isset($_POST['faq_answer'])) {
+        update_post_meta($post_id, '_faq_answer', wp_kses_post($_POST['faq_answer']));
+    }
+}
+add_action('save_post', 'mbo_save_faq_meta');
+
+/**
+ * Personalizar colunas da lista de FAQs no admin
+ */
+function mbo_faq_columns($columns) {
+    $new_columns = array();
+    $new_columns['cb'] = $columns['cb'];
+    $new_columns['title'] = 'Pergunta';
+    $new_columns['faq_answer'] = 'Resposta';
+    $new_columns['menu_order'] = 'Ordem';
+    $new_columns['date'] = $columns['date'];
+    return $new_columns;
+}
+add_filter('manage_faq_posts_columns', 'mbo_faq_columns');
+
+function mbo_faq_column_content($column, $post_id) {
+    switch ($column) {
+        case 'faq_answer':
+            $answer = get_post_meta($post_id, '_faq_answer', true);
+            echo wp_trim_words(strip_tags($answer), 15, '...');
+            break;
+        case 'menu_order':
+            echo get_post_field('menu_order', $post_id);
+            break;
+    }
+}
+add_action('manage_faq_posts_custom_column', 'mbo_faq_column_content', 10, 2);
+
+/**
+ * Função para exibir FAQs
+ */
+function mbo_display_faqs($atts = array()) {
+    $atts = shortcode_atts(array(
+        'limit' => -1,
+        'category' => '',
+    ), $atts);
+
+    $args = array(
+        'post_type' => 'faq',
+        'posts_per_page' => $atts['limit'],
+        'post_status' => 'publish',
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+    );
+
+    $faqs = new WP_Query($args);
+    
+    if (!$faqs->have_posts()) {
+        return '<p>Nenhuma pergunta frequente encontrada.</p>';
+    }
+
+    ob_start();
+    ?>
+    <div class="faq-section">
+        <div class="faq-container">
+            <?php while ($faqs->have_posts()) : $faqs->the_post(); ?>
+                <?php 
+                // Primeiro tenta o campo personalizado, depois o conteúdo do post
+                $answer = get_post_meta(get_the_ID(), '_faq_answer', true);
+                if (empty($answer)) {
+                    $answer = get_the_content();
+                }
+                $faq_id = 'faq-' . get_the_ID();
+                ?>
+                <div class="faq-item">
+                    <div class="faq-question" data-target="<?php echo esc_attr($faq_id); ?>">
+                        <h3><?php the_title(); ?></h3>
+                        <span class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </div>
+                    <div class="faq-answer" id="<?php echo esc_attr($faq_id); ?>">
+                        <div class="faq-content">
+                            <?php 
+                            if (!empty($answer)) {
+                                echo wp_kses_post($answer);
+                            } else {
+                                echo '<p>Resposta não encontrada.</p>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        </div>
+    </div>
+    <?php
+    wp_reset_postdata();
+    return ob_get_clean();
+}
+
+// Registrar shortcode para FAQs
+function mbo_faq_shortcode($atts) {
+    return mbo_display_faqs($atts);
+}
+add_shortcode('mbo_faq', 'mbo_faq_shortcode');
 
 // Forçar atualização do tema - versão 1.0.3
