@@ -395,11 +395,13 @@
 
 /* Sidebar */
 .news-sidebar {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    padding: 35px;
     height: fit-content;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    border: 1px solid rgba(200, 169, 110, 0.1);
+    transition: all 0.3s ease;
 }
 
 .sidebar-widget {
@@ -412,11 +414,27 @@
 
 .widget-title {
     color: #2c3e50;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #C8A96E;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid transparent;
+    background: linear-gradient(90deg, #C8A96E 0%, #E4C97D 100%);
+    background-size: 100% 3px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: relative;
+}
+
+.widget-title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 30%;
+    height: 3px;
+    background: linear-gradient(90deg, #B8956E 0%, #C8A96E 100%);
+    border-radius: 2px;
 }
 
 .category-list {
@@ -425,26 +443,67 @@
 }
 
 .category-list li {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.1);
+    transition: all 0.3s ease;
+}
+
+.category-list li:last-child {
+    border-bottom: none;
+}
+
+.category-list li:hover {
+    padding-left: 10px;
+    background: rgba(200, 169, 110, 0.05);
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.2);
 }
 
 .category-list a {
-    color: #6c757d;
+    color: #495057;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .category-list a:hover {
     color: #C8A96E;
+    font-weight: 600;
+}
+
+.category-list a::before {
+    content: '▸';
+    color: #C8A96E;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.category-list a:hover::before {
+    transform: translateX(3px);
 }
 
 .recent-post-item {
-    padding: 15px 0;
-    border-bottom: 1px solid #e9ecef;
+    padding: 18px;
+    border-bottom: 1px solid rgba(200, 169, 110, 0.1);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    background: rgba(248, 249, 250, 0.5);
 }
 
 .recent-post-item:last-child {
     border-bottom: none;
+    margin-bottom: 0;
+}
+
+.recent-post-item:hover {
+    background: rgba(200, 169, 110, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .recent-post-title a {
@@ -470,12 +529,217 @@
     background: linear-gradient(135deg, #C8A96E 0%, #B8956E 100%);
     color: white;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 16px;
+    padding: 40px 30px !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(200, 169, 110, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-widget::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .cta-widget .widget-title {
     color: white;
-    border-bottom-color: rgba(255,255,255,0.3);
+    border-bottom: none;
+    background: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-widget .widget-title::after {
+    display: none;
+}
+
+.cta-widget p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    opacity: 0.95;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-widget .btn-primary {
+    background: white;
+    color: #C8A96E;
+    border: 2px solid white;
+    padding: 15px 35px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.cta-widget .btn-primary:hover {
+    background: rgba(255,255,255,0.9);
+    color: #B8956E;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    border-color: rgba(255,255,255,0.9);
+}
+
+/* ===== FORMULÁRIO DE BUSCA MODERNO ===== */
+.search-form {
+    margin-top: 15px;
+}
+
+.search-form-wrapper {
+    position: relative;
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.search-form-wrapper:focus-within {
+    box-shadow: 0 4px 20px rgba(200, 169, 110, 0.2);
+    transform: translateY(-1px);
+}
+
+.search-field {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: #2c3e50;
+    outline: none;
+}
+
+.search-field::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.search-submit {
+    background: linear-gradient(135deg, #C8A96E 0%, #B8956E 100%);
+    border: none;
+    padding: 15px 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.search-submit:hover {
+    background: linear-gradient(135deg, #B8956E 0%, #A8856E 100%);
+    transform: scale(1.02);
+}
+
+.search-submit .fa-search {
+    font-size: 0.9rem;
+}
+
+.search-text {
+    font-size: 0.9rem;
+}
+
+/* Responsividade do formulário de busca e CTA */
+@media (max-width: 768px) {
+    .search-text {
+        display: none;
+    }
+    
+    .search-submit {
+        padding: 15px;
+    }
+    
+    .search-field {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .cta-widget {
+        padding: 30px 20px !important;
+    }
+    
+    .cta-widget .widget-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .cta-widget p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    
+    .cta-widget .btn-primary {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== ESTILOS DE FALLBACK PARA FORMULÁRIO PADRÃO ===== */
+/* Caso o WordPress use o formulário padrão em vez do personalizado */
+.sidebar-widget .search-form:not(.search-form-wrapper) {
+    margin-top: 15px;
+}
+
+.sidebar-widget .search-form:not(.search-form-wrapper) label {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.sidebar-widget .search-form:not(.search-form-wrapper) label:focus-within {
+    box-shadow: 0 4px 20px rgba(200, 169, 110, 0.2);
+    transform: translateY(-1px);
+}
+
+.sidebar-widget .search-form:not(.search-form-wrapper) .search-field {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: #2c3e50;
+    outline: none;
+}
+
+.sidebar-widget .search-form:not(.search-form-wrapper) .search-field::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.sidebar-widget .search-form:not(.search-form-wrapper) .search-submit {
+    background: linear-gradient(135deg, #C8A96E 0%, #B8956E 100%);
+    border: none;
+    padding: 15px 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar-widget .search-form:not(.search-form-wrapper) .search-submit:hover {
+    background: linear-gradient(135deg, #B8956E 0%, #A8856E 100%);
+    transform: scale(1.02);
 }
 
 .btn {

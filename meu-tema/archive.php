@@ -45,8 +45,8 @@ get_header(); ?>
                     <!-- Filtros de Categoria -->
                     <div class="news-filters">
                         <div class="filter-buttons">
-                            <a href="<?php echo esc_url(get_post_type_archive_link('post')); ?>" 
-                               class="filter-btn <?php echo !is_category() ? 'active' : ''; ?>">
+                            <a href="<?php echo esc_url(add_query_arg('show_all_posts', '1', home_url())); ?>" 
+                               class="filter-btn <?php echo (isset($_GET['show_all_posts']) || (!is_category() && !is_home())) ? 'active' : ''; ?>">
                                 Todas
                             </a>
                             <?php
@@ -164,7 +164,7 @@ get_header(); ?>
             <aside class="news-sidebar">
                 <div class="sidebar-widget">
                     <h3 class="widget-title">Buscar Notícias</h3>
-                    <?php get_search_form(); ?>
+                    <?php include(get_template_directory() . '/searchform.php'); ?>
                 </div>
 
                 <div class="sidebar-widget">

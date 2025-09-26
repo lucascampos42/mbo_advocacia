@@ -1,4 +1,29 @@
-<?php get_header(); ?>
+<?php 
+get_header(); 
+
+// Se o parâmetro show_all_posts estiver presente, mostrar todos os posts
+if (isset($_GET['show_all_posts'])) {
+    // Configurar query para mostrar todos os posts
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => 12,
+        'post_status' => 'publish',
+        'paged' => get_query_var('paged') ? get_query_var('paged') : 1
+    );
+    
+    // Executar a query
+    $all_posts_query = new WP_Query($args);
+    
+    // Definir a query global para que o template archive.php funcione
+    global $wp_query;
+    $wp_query = $all_posts_query;
+    
+    // Incluir o template de arquivo
+    include(get_template_directory() . '/archive.php');
+    get_footer();
+    return;
+}
+?>
 <!-- Atualização dos ícones SVG - versão 1.0.3 -->
 
 <main id="primary" class="site-main">
