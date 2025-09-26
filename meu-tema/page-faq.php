@@ -33,7 +33,7 @@ get_header(); ?>
 .page-hero {
     padding: 80px 0 40px 0;
     text-align: center;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--fundo-claro) 0%, var(--fundo-cinza-claro) 100%);
 }
 
 .page-title {

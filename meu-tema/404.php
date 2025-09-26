@@ -123,7 +123,7 @@ get_header(); ?>
 .error-404-number {
     font-size: 8rem;
     font-weight: bold;
-    color: #c0392b;
+    color: var(--cor-perigo);
     line-height: 1;
     display: block;
     margin-bottom: 1rem;
@@ -131,13 +131,13 @@ get_header(); ?>
 
 .error-description {
     font-size: 1.2rem;
-    color: #666;
+    color: var(--texto-escuro);
     margin-bottom: 1rem;
 }
 
 .error-suggestion {
     font-size: 1rem;
-    color: #888;
+    color: var(--texto-cinza-claro);
 }
 
 .error-404-actions {
@@ -155,7 +155,7 @@ get_header(); ?>
 }
 
 .action-item h3 {
-    color: #2c3e50;
+    color: var(--texto-azul-claro);
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
@@ -170,30 +170,30 @@ get_header(); ?>
 }
 
 .popular-pages a, .recent-posts-404 a, .categories-404 a {
-    color: #34495e;
+    color: var(--cor-azul-escuro);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .popular-pages a:hover, .recent-posts-404 a:hover, .categories-404 a:hover {
-    color: #3498db;
+    color: var(--cor-info);
 }
 
 .post-count {
-    color: #999;
+    color: var(--texto-cinza-medio-claro);
     font-size: 0.9rem;
 }
 
 .error-404-contact {
-    background: #f8f9fa;
+    background: var(--fundo-claro);
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
-    border-left: 4px solid #c0392b;
+    border-left: 4px solid var(--cor-perigo);
 }
 
 .contact-cta h3 {
-    color: #2c3e50;
+    color: var(--texto-azul-claro);
     margin-bottom: 1rem;
 }
 

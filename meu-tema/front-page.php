@@ -53,7 +53,7 @@ if (isset($_GET['show_all_posts'])) {
         $overlay_enabled = get_theme_mod('mbo_hero_overlay_enable', false);
         $bg_image = get_theme_mod('mbo_hero_background_image', '');
         if ($overlay_enabled && !empty($bg_image)) {
-            $overlay_color = get_theme_mod('mbo_hero_overlay_color', '#000000');
+            $overlay_color = get_theme_mod('mbo_hero_overlay_color', 'var(--preto-marmore)');
             $overlay_opacity = get_theme_mod('mbo_hero_overlay_opacity', 50);
             $rgba_color = sscanf($overlay_color, "#%02x%02x%02x");
             $rgba = 'rgba(' . implode(',', $rgba_color) . ',' . ($overlay_opacity / 100) . ')';

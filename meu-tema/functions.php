@@ -255,7 +255,7 @@ function mbo_advocacia_post_navigation() {
  */
 function mbo_advocacia_meta_tags() {
     echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-    echo '<meta name="theme-color" content="#2c3e50">';
+    echo '<meta name="theme-color" content="var(--texto-azul-claro)">';
 }
 add_action('wp_head', 'mbo_advocacia_meta_tags');
 
@@ -426,6 +426,61 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_Menu
  * Customizer - Campos personalizados para página inicial
  */
 function mbo_advocacia_customize_register($wp_customize) {
+    // === SEÇÃO DE CORES DO TEMA ===
+    $wp_customize->add_section('mbo_colors_section', array(
+        'title'    => __('Cores do Tema', 'mbo-advocacia'),
+        'priority' => 25,
+        'description' => __('Personalize as cores principais do tema MBO Advocacia', 'mbo-advocacia'),
+    ));
+
+    // Cor Principal Dourada
+    $wp_customize->add_setting('mbo_color_dourado_principal', array(
+        'default'           => '#C9A64E',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'mbo_color_dourado_principal', array(
+        'label'       => __('Cor Dourada Principal', 'mbo-advocacia'),
+        'description' => __('Cor principal da marca (botões, destaques)', 'mbo-advocacia'),
+        'section'     => 'mbo_colors_section',
+    )));
+
+    // Cor Dourada Clara
+    $wp_customize->add_setting('mbo_color_dourado_claro', array(
+        'default'           => '#E4C97D',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'mbo_color_dourado_claro', array(
+        'label'       => __('Cor Dourada Clara', 'mbo-advocacia'),
+        'description' => __('Variação clara da cor dourada (hover, textos)', 'mbo-advocacia'),
+        'section'     => 'mbo_colors_section',
+    )));
+
+    // Cor de Fundo Principal
+    $wp_customize->add_setting('mbo_color_fundo_principal', array(
+        'default'           => '#1A1A1A',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'mbo_color_fundo_principal', array(
+        'label'       => __('Cor de Fundo Principal', 'mbo-advocacia'),
+        'description' => __('Cor de fundo principal do site', 'mbo-advocacia'),
+        'section'     => 'mbo_colors_section',
+    )));
+
+    // Cor de Texto Principal
+    $wp_customize->add_setting('mbo_color_texto_principal', array(
+        'default'           => '#F5F5F5',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'mbo_color_texto_principal', array(
+        'label'       => __('Cor de Texto Principal', 'mbo-advocacia'),
+        'description' => __('Cor principal dos textos', 'mbo-advocacia'),
+        'section'     => 'mbo_colors_section',
+    )));
+
     // Seção da Página Inicial
     $wp_customize->add_section('mbo_homepage_section', array(
         'title'    => __('Página Inicial', 'mbo-advocacia'),
@@ -576,7 +631,7 @@ function mbo_advocacia_customize_register($wp_customize) {
 
     // Cor da Camada
     $wp_customize->add_setting('mbo_hero_overlay_color', array(
-        'default'           => '#000000',
+        'default'           => 'var(--preto-marmore)',
         'sanitize_callback' => 'sanitize_hex_color',
     ));
     $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'mbo_hero_overlay_color', array(
@@ -1319,7 +1374,7 @@ function mbo_faq_answer_callback($post) {
     ));
     echo '</div>';
     
-    echo '<div style="margin: 15px 0; padding: 10px; background: #f0f8ff; border-left: 4px solid #0073aa;">';
+    echo '<div style="margin: 15px 0; padding: 10px; background: var(--fundo-muito-claro); border-left: 4px solid var(--cor-info);">';
     echo '<strong>💡 Dica:</strong> Use o campo "Ordem" na lateral direita para definir a sequência das perguntas.';
     echo '</div>';
 }
@@ -1439,4 +1494,53 @@ function mbo_faq_shortcode($atts) {
 }
 add_shortcode('mbo_faq', 'mbo_faq_shortcode');
 
-// Forçar atualização do tema - versão 1.0.3
+/**
+ * Gera CSS dinâmico baseado nas configurações do customizador
+ */
+function mbo_advocacia_customizer_css() {
+    // Obter valores das configurações
+    $dourado_principal = get_theme_mod('mbo_color_dourado_principal', '#C9A64E');
+    $dourado_claro = get_theme_mod('mbo_color_dourado_claro', '#E4C97D');
+    $fundo_principal = get_theme_mod('mbo_color_fundo_principal', '#1A1A1A');
+    $texto_principal = get_theme_mod('mbo_color_texto_principal', '#F5F5F5');
+
+    // Gerar CSS personalizado
+    $css = "
+    <style type='text/css'>
+    :root {
+        --dourado-principal: {$dourado_principal} !important;
+        --dourado-claro: {$dourado_claro} !important;
+        --fundo-principal: {$fundo_principal} !important;
+        --preto-marmore: {$fundo_principal} !important;
+        --texto-principal: {$texto_principal} !important;
+        --branco-suave: {$texto_principal} !important;
+        
+        /* Atualizar variáveis de compatibilidade */
+        --cor-destaque: {$dourado_principal} !important;
+        --cor-hover: {$dourado_claro} !important;
+        --accent-color: {$dourado_principal} !important;
+        --primary-color: {$fundo_principal} !important;
+        --text-color: {$texto_principal} !important;
+    }
+    </style>
+    ";
+
+    echo $css;
+}
+add_action('wp_head', 'mbo_advocacia_customizer_css');
+
+/**
+ * JavaScript para preview em tempo real no customizador
+ */
+function mbo_advocacia_customizer_preview_js() {
+    wp_enqueue_script(
+        'mbo-customizer-preview',
+        get_template_directory_uri() . '/assets/js/customizer-preview.js',
+        array('customize-preview'),
+        '1.0.0',
+        true
+    );
+}
+add_action('customize_preview_init', 'mbo_advocacia_customizer_preview_js');
+
+// Forçar atualização do tema - versão 1.0.4

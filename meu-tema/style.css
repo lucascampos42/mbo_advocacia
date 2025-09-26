@@ -1,33 +1,85 @@
 /*
 Theme Name: MBO Advocacia
-Description: Tema personalizado para o escritório MBO Advocacia
+Description: Tema personalizado para o escritÃ³rio MBO Advocacia
 Author: Lucas Campos
 Version: 1.0.2
 Text Domain: mbo-advocacia
 */
 
-/* Variáveis CSS - Paleta de Cores MBO Advocacia */
+/* VariÃ¡veis CSS - Paleta de Cores MBO Advocacia */
 :root {
+    /* Cores Principais da Marca */
     --dourado-principal: #C9A64E;
     --dourado-claro: #E4C97D;
+    --dourado-escuro: #B8956E;
+    --dourado-mais-escuro: #A8856E;
+    --dourado-variacao-1: #B8956A;
+    --dourado-variacao-2: #D4B574;
     --preto-marmore: #1A1A1A;
+    --preto-mais-escuro: #0F0F0F;
     --cinza-profundo: #2E2E2E;
+    --cinza-medio: #3A3A3A;
     --branco-suave: #F5F5F5;
+    --branco-puro: #ffffff;
     
-    /* Variáveis de uso */
-    --cor-fundo-principal: var(--preto-marmore);
-    --cor-texto-principal: var(--branco-suave);
-    --cor-texto-secundario: var(--cinza-profundo);
+    /* Cores de Texto */
+    --texto-principal: var(--branco-suave);
+    --texto-secundario: var(--cinza-profundo);
+    --texto-claro: #E0E0E0;
+    --texto-medio: #B0B0B0;
+    --texto-escuro: #666;
+    --texto-muito-escuro: #333;
+    --texto-cinza: #6c757d;
+    --texto-cinza-claro: #888;
+    --texto-cinza-escuro: #555;
+    --texto-cinza-medio-claro: #999;
+    --texto-azul-escuro: #1a365d;
+    --texto-azul-medio: #64748b;
+    --texto-azul-claro: #2c3e50;
+    --texto-cinza-medio: #495057;
+    
+    /* Cores de Fundo */
+    --fundo-principal: var(--preto-marmore);
+    --fundo-secundario: var(--cinza-profundo);
+    --fundo-claro: #f8f9fa;
+    --fundo-muito-claro: #f0f8ff;
+    --fundo-cinza-claro: #e9ecef;
+    
+    /* Cores de Borda */
+    --borda-principal: var(--dourado-principal);
+    --borda-clara: #e9ecef;
+    --borda-escura: #333;
+    
+    /* Cores de Estado */
+    --cor-sucesso: #22c55e;
+    --cor-erro: #ef4444;
+    --cor-aviso: #f39c12;
+    --cor-info: #3498db;
+    --cor-info-hover: #2980b9;
+    --cor-perigo: #c0392b;
+    --cor-azul-escuro: #34495e;
+    
+    /* Cores de Redes Sociais */
+    --facebook: #3b5998;
+    --twitter: #1da1f2;
+    --linkedin: #0077b5;
+    --whatsapp: #25d366;
+    --whatsapp-escuro: #128C7E;
+    
+    /* VariÃ¡veis de uso (compatibilidade) */
+    --cor-fundo-principal: var(--fundo-principal);
+    --cor-texto-principal: var(--texto-principal);
+    --cor-texto-secundario: var(--texto-secundario);
     --cor-destaque: var(--dourado-principal);
     --cor-hover: var(--dourado-claro);
     
-    /* Variáveis adicionais */
-    --accent-color: #C9A64E;
-    --primary-color: #1A1A1A;
-    --text-color: #F5F5F5;
+    /* VariÃ¡veis adicionais (compatibilidade) */
+    --accent-color: var(--dourado-principal);
+    --primary-color: var(--preto-marmore);
+    --text-color: var(--branco-suave);
 }
 
-/* Reset básico */
+/* Reset bÃ¡sico */
 * {
     margin: 0;
     padding: 0;
@@ -37,13 +89,13 @@ Text Domain: mbo-advocacia
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #F5F5F5;
-    background-color: #1A1A1A;
+    color: var(--texto-principal);
+    background-color: var(--fundo-principal);
     padding-top: 50px;
     margin: 0;
 }
 
-/* Remove espaçamento extra na página inicial */
+/* Remove espaÃ§amento extra na pÃ¡gina inicial */
 .home .site-main,
 .front-page .site-main {
     margin-top: 0;
@@ -120,8 +172,8 @@ body {
 .navbar-toggler {
     display: none;
     background: none;
-    border: 2px solid #C9A64E;
-    color: #C9A64E;
+    border: 2px solid var(--dourado-principal);
+    color: var(--dourado-principal);
     padding: 0.5rem;
     border-radius: 4px;
     cursor: pointer;
@@ -130,25 +182,25 @@ body {
 }
 
 .navbar-toggler:hover {
-    background: #C9A64E;
-    color: #1A1A1A;
+    background: var(--dourado-principal);
+    color: var(--preto-marmore);
 }
 
 .navbar-toggler.active {
-    background: #C9A64E;
-    color: #1A1A1A;
+    background: var(--dourado-principal);
+    color: var(--preto-marmore);
 }
 
 .site-title {
     font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
-    color: #C9A64E;
+    color: var(--dourado-principal);
 }
 
 .site-description {
     font-size: 1rem;
-    color: #F5F5F5;
+    color: var(--texto-principal);
     opacity: 0.8;
     margin-top: 0.5rem;
 }
@@ -158,7 +210,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Navegação */
+/* NavegaÃ§Ã£o */
 .main-navigation {
     flex: 1;
     display: flex;
@@ -177,7 +229,7 @@ body {
 }
 
 .main-navigation a {
-    color: #F5F5F5;
+    color: var(--texto-principal);
     text-decoration: none;
     padding: 1rem 1.2rem;
     border-radius: 6px;
@@ -189,18 +241,18 @@ body {
 
 .main-navigation a:hover {
     background: rgba(201, 166, 78, 0.2);
-    color: #E4C97D;
+    color: var(--dourado-claro);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(201, 166, 78, 0.3);
 }
 
 .main-navigation a.active {
     background: rgba(201, 166, 78, 0.3);
-    color: #E4C97D;
+    color: var(--dourado-claro);
     box-shadow: 0 2px 10px rgba(201, 166, 78, 0.4);
 }
 
-/* Conteúdo principal */
+/* ConteÃºdo principal */
 .site-main {
     min-height: 60vh;
 }
@@ -214,22 +266,22 @@ body {
 
 /* Posts */
 .post {
-    background: #2E2E2E;
+    background: var(--cinza-profundo);
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    border: 1px solid #C9A64E;
+    border: 1px solid var(--dourado-principal);
 }
 
 .post-title {
-    color: #C9A64E;
+    color: var(--dourado-principal);
     margin-bottom: 1rem;
     font-size: 1.8rem;
 }
 
 .post-meta {
-    color: #E4C97D;
+    color: var(--dourado-claro);
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
@@ -244,11 +296,11 @@ body {
 
 /* Sidebar */
 .sidebar {
-    background: #2E2E2E;
+    background: var(--cinza-profundo);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    border: 1px solid #C9A64E;
+    border: 1px solid var(--dourado-principal);
     height: fit-content;
 }
 
@@ -257,21 +309,21 @@ body {
 }
 
 .widget-title {
-    color: #C9A64E;
+    color: var(--dourado-principal);
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    border-bottom: 2px solid #C9A64E;
+    border-bottom: 2px solid var(--dourado-principal);
     padding-bottom: 0.5rem;
 }
 
 /* Footer */
 .site-footer {
-    background-color: #1A1A1A;
-    color: #F5F5F5;
+    background-color: var(--preto-marmore);
+    color: var(--branco-suave);
     text-align: center;
     padding: 2rem 0;
     margin-top: 3rem;
-    border-top: 3px solid #C9A64E;
+    border-top: 3px solid var(--dourado-principal);
 }
 
 .footer-widgets {
@@ -284,16 +336,16 @@ body {
 .footer-info {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid #2E2E2E;
-    color: #E4C97D;
+    border-top: 1px solid var(--cinza-profundo);
+    color: var(--dourado-claro);
     opacity: 0.9;
 }
 
-/* Botões */
+/* BotÃµes */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background-color: #3498db;
+    background-color: var(--cor-info);
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -301,13 +353,13 @@ body {
 }
 
 .btn:hover {
-    background-color: #2980b9;
+    background-color: var(--cor-info-hover);
 }
 
-/* Botões e Links */
+/* BotÃµes e Links */
 .btn, button, input[type="submit"] {
-    background-color: #C9A64E;
-    color: #1A1A1A;
+    background-color: var(--dourado-principal);
+    color: var(--preto-marmore);
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
@@ -319,37 +371,37 @@ body {
 }
 
 .btn:hover, button:hover, input[type="submit"]:hover {
-    background-color: #E4C97D;
+    background-color: var(--dourado-claro);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(201, 166, 78, 0.3);
 }
 
 .btn-secondary {
-    background-color: #2E2E2E;
-    color: #F5F5F5;
-    border: 2px solid #C9A64E;
+    background-color: var(--cinza-profundo);
+    color: var(--branco-suave);
+    border: 2px solid var(--dourado-principal);
 }
 
 .btn-secondary:hover {
-    background-color: #C9A64E;
-    color: #1A1A1A;
+    background-color: var(--dourado-principal);
+    color: var(--preto-marmore);
 }
 
 a {
-    color: #C9A64E;
+    color: var(--dourado-principal);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #E4C97D;
+    color: var(--dourado-claro);
 }
 
-/* Formulários */
+/* FormulÃ¡rios */
 input[type="text"], input[type="email"], input[type="search"], textarea {
-    background-color: #2E2E2E;
-    border: 2px solid #C9A64E;
-    color: #F5F5F5;
+    background-color: var(--cinza-profundo);
+    border: 2px solid var(--dourado-principal);
+    color: var(--branco-suave);
     padding: 10px;
     border-radius: 5px;
     width: 100%;
@@ -358,14 +410,14 @@ input[type="text"], input[type="email"], input[type="search"], textarea {
 
 input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus, textarea:focus {
     outline: none;
-    border-color: #E4C97D;
+    border-color: var(--dourado-claro);
     box-shadow: 0 0 10px rgba(201, 166, 78, 0.3);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     body {
-        padding-top: 10px; /* Mais espaço para mobile */
+        padding-top: 10px; /* Mais espaÃ§o para mobile */
     }
     
     .container {
@@ -421,8 +473,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     .navbar-toggler {
         display: block;
         background: none;
-        border: 2px solid #C9A64E;
-        color: #C9A64E;
+        border: 2px solid var(--dourado-principal);
+        color: var(--dourado-principal);
         padding: 0.5rem;
         border-radius: 4px;
         cursor: pointer;
@@ -430,13 +482,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
     
     .navbar-toggler:hover {
-        background: #C9A64E;
-        color: #1A1A1A;
+        background: var(--dourado-principal);
+        color: var(--preto-marmore);
     }
     
     .navbar-toggler.active {
-        background: #C9A64E;
-        color: #1A1A1A;
+        background: var(--dourado-principal);
+        color: var(--preto-marmore);
     }
     
     .content-area {
@@ -458,16 +510,16 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* Cores específicas para advocacia */
+/* Cores especÃ­ficas para advocacia */
 .legal-accent {
-    color: #c0392b;
+    color: var(--cor-perigo);
 }
 
 .legal-bg {
-    background-color: #c0392b;
+    background-color: var(--cor-perigo);
 }
 
-/* Utilitários */
+/* UtilitÃ¡rios */
 .text-center {
     text-align: center;
 }
@@ -480,7 +532,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     margin-top: 2rem;
 }
 
-/* ===== PÁGINA INICIAL ===== */
+/* ===== PÃGINA INICIAL ===== */
 
 /* Hero Section */
 .hero-section {
@@ -511,7 +563,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     z-index: 2;
 }
 
-/* Card de Experiência */
+/* Card de ExperiÃªncia */
 .experience-card {
     display: inline-flex;
     align-items: center;
@@ -545,7 +597,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     white-space: nowrap;
 }
 
-/* Conteúdo Principal */
+/* ConteÃºdo Principal */
 .hero-content {
     max-width: 800px;
     text-align: center;
@@ -580,7 +632,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     margin-right: auto;
 }
 
-/* Botões da Hero Section */
+/* BotÃµes da Hero Section */
 .hero-buttons {
     display: flex;
     gap: 1rem;
@@ -629,9 +681,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     box-shadow: 0 6px 20px rgba(245, 245, 245, 0.2);
 }
 
-/* ===== SEÇÃO SOBRE ===== */
+/* ===== SEÃ‡ÃƒO SOBRE ===== */
 
-/* Seção Sobre */
+/* SeÃ§Ã£o Sobre */
 .about-section {
     background: var(--branco-suave);
     padding: 6rem 0;
@@ -648,7 +700,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     animation: fadeInUp 0.8s ease-out;
 }
 
-/* Layout da Seção Sobre */
+/* Layout da SeÃ§Ã£o Sobre */
 .about-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -677,7 +729,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
-/* Três Tópicos com Ícones */
+/* TrÃªs TÃ³picos com Ãcones */
 .about-features {
     display: flex;
     flex-direction: column;
@@ -880,7 +932,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     font-weight: 500;
 }
 
-/* Responsividade da Seção Sobre */
+/* Responsividade da SeÃ§Ã£o Sobre */
 
 /* Desktop pequeno - 1200px e abaixo */
 @media (max-width: 1200px) {
@@ -1138,9 +1190,9 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* ===== ANIMAÇÕES ===== */
+/* ===== ANIMAÃ‡Ã•ES ===== */
 
-/* Keyframes para animações de entrada */
+/* Keyframes para animaÃ§Ãµes de entrada */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1229,10 +1281,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* ===== SEÇÃO ÁREAS DE ATUAÇÃO ===== */
+/* ===== SEÃ‡ÃƒO ÃREAS DE ATUAÃ‡ÃƒO ===== */
 .services-section {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--fundo-claro) 0%, var(--fundo-cinza-claro) 100%);
     position: relative;
 }
 
@@ -1292,7 +1344,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .service-card {
-    background: #ffffff;
+    background: var(--branco-puro);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -1370,7 +1422,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .service-description {
-    color: #B0B0B0;
+    color: var(--texto-medio);
     line-height: 1.6;
     font-size: 0.95rem;
 }
@@ -1442,10 +1494,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* ===== SEÇÃO DE CONTATO ===== */
+/* ===== SEÃ‡ÃƒO DE CONTATO ===== */
 .contact-section {
     padding: 5rem 0;
-    background: linear-gradient(135deg, var(--preto-marmore) 0%, #0F0F0F 100%);
+    background: linear-gradient(135deg, var(--preto-marmore) 0%, var(--preto-mais-escuro) 100%);
     position: relative;
 }
 
@@ -1477,7 +1529,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 .contact-header .section-subtitle {
     font-size: 1.2rem;
-    color: #B0B0B0;
+    color: var(--texto-medio);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -1492,7 +1544,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     z-index: 1;
 }
 
-/* Informações de Contato */
+/* InformaÃ§Ãµes de Contato */
 .contact-info h3 {
     font-size: 1.8rem;
     color: var(--dourado-principal);
@@ -1501,7 +1553,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .contact-info > p {
-    color: #B0B0B0;
+    color: var(--texto-medio);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
@@ -1557,13 +1609,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .contact-details p {
-    color: #E0E0E0;
+    color: var(--texto-claro);
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.4;
 }
 
-/* Formulário de Contato */
+/* FormulÃ¡rio de Contato */
 .contact-form h3 {
     font-size: 1.8rem;
     color: var(--dourado-principal);
@@ -1572,12 +1624,12 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .contact-form > p {
-    color: #B0B0B0;
+    color: var(--texto-medio);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
 
-/* Mensagens de Feedback do Formulário */
+/* Mensagens de Feedback do FormulÃ¡rio */
 .contact-message {
     padding: 1rem;
     border-radius: 8px;
@@ -1587,14 +1639,14 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 .contact-message.success {
     background-color: rgba(34, 197, 94, 0.1);
-    border-left-color: #22c55e;
-    color: #22c55e;
+    border-left-color: var(--cor-sucesso);
+    color: var(--cor-sucesso);
 }
 
 .contact-message.error {
     background-color: rgba(239, 68, 68, 0.1);
-    border-left-color: #ef4444;
-    color: #ef4444;
+    border-left-color: var(--cor-erro);
+    color: var(--cor-erro);
 }
 
 .contact-message p {
@@ -1627,7 +1679,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
-    color: #E0E0E0;
+    color: var(--texto-claro);
     font-size: 1rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
@@ -1644,12 +1696,12 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #888;
+    color: var(--texto-cinza-claro);
 }
 
 .form-group select option {
     background: var(--preto-marmore);
-    color: #E0E0E0;
+    color: var(--texto-claro);
 }
 
 .btn-submit {
@@ -1703,7 +1755,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 /* News Section */
 .news-section {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: var(--fundo-claro);
 }
 
 .news-header {
@@ -1720,7 +1772,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 .news-header .section-subtitle {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--texto-escuro);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -1806,7 +1858,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .news-title a {
-    color: #333;
+    color: var(--texto-muito-escuro);
     text-decoration: none;
     font-size: 1.25rem;
     font-weight: 700;
@@ -1820,7 +1872,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .news-excerpt {
-    color: #666;
+    color: var(--texto-escuro);
     line-height: 1.7;
     margin-bottom: 20px;
     font-size: 0.95rem;
@@ -1848,16 +1900,16 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     transform: translateX(3px);
 }
 
-/* Placeholder para imagens de notícias */
+/* Placeholder para imagens de notÃ­cias */
 .news-placeholder {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--fundo-claro) 0%, var(--fundo-cinza-claro) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .placeholder-icon {
-    color: #C8A96E;
+    color: var(--dourado-principal);
     opacity: 0.6;
     transition: opacity 0.3s ease;
 }
@@ -1872,7 +1924,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     padding: 40px;
     background: white;
     border-radius: 12px;
-    color: #666;
+    color: var(--texto-escuro);
 }
 
 .no-news a {
@@ -1914,8 +1966,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 /* Footer Styles - Layout Horizontal */
 .site-footer {
-    background: #1a1a1a;
-    color: #ffffff;
+    background: var(--preto-marmore);
+    color: var(--branco-puro);
     padding: 25px 0 15px;
     margin-top: 60px;
 }
@@ -1932,7 +1984,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .footer-widget h4.widget-title {
-    color: #C8A96E;
+    color: var(--dourado-principal);
     margin-bottom: 20px;
     font-size: 1.3rem;
     font-weight: 700;
@@ -1943,7 +1995,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .footer-subtitle {
-    color: #B0B0B0;
+    color: var(--texto-medio);
     font-size: 0.8rem;
     margin: 2px 0 10px 0;
     font-weight: 400;
@@ -1967,11 +2019,11 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 .footer-widget-1 p {
     font-size: 0.8rem;
     line-height: 1.4;
-    color: #B0B0B0;
+    color: var(--texto-medio);
     margin: 0;
 }
 
-/* Layout horizontal para informações de contato */
+/* Layout horizontal para informaÃ§Ãµes de contato */
 .footer-contact {
     display: flex;
     flex-direction: column;
@@ -1985,7 +2037,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .footer-contact .contact-icon {
-    color: #C8A96E;
+    color: var(--dourado-principal);
     flex-shrink: 0;
     width: 24px;
     height: 24px;
@@ -2000,24 +2052,24 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 .footer-contact .contact-details span:first-child {
     font-weight: 600;
-    color: #ffffff;
+    color: var(--branco-puro);
     font-size: 0.75rem;
     min-width: 55px;
 }
 
 .footer-contact .contact-details a,
 .footer-contact .contact-details span:last-child {
-    color: #B0B0B0;
+    color: var(--texto-medio);
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 0.75rem;
 }
 
 .footer-contact .contact-details a:hover {
-    color: #C8A96E;
+    color: var(--dourado-principal);
 }
 
-/* Menu horizontal para áreas de atuação */
+/* Menu horizontal para Ã¡reas de atuaÃ§Ã£o */
 .footer-menu {
     list-style: none;
     padding: 0;
@@ -2032,7 +2084,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .footer-menu a {
-    color: #B0B0B0;
+    color: var(--texto-medio);
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 0.8rem;
@@ -2040,7 +2092,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .footer-menu a:hover {
-    color: #C8A96E;
+    color: var(--dourado-principal);
 }
 
 /* Responsividade para layout horizontal */
@@ -2061,15 +2113,15 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .site-credits {
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--texto-muito-escuro);
     padding-top: 20px;
     text-align: center;
-    color: #B0B0B0;
+    color: var(--texto-medio);
     font-size: 0.9rem;
 }
 
 .site-credits a {
-    color: #C8A96E;
+    color: var(--dourado-principal);
     text-decoration: none;
 }
 
@@ -2129,15 +2181,15 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* Botão Flutuante Voltar ao Topo */
+/* BotÃ£o Flutuante Voltar ao Topo */
 .back-to-top {
     position: fixed;
-    bottom: 100px; /* Posicionado acima do botão WhatsApp */
+    bottom: 100px; /* Posicionado acima do botÃ£o WhatsApp */
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #C8A96E, #B8956A);
-    color: #ffffff;
+    background: linear-gradient(135deg, var(--dourado-principal), var(--dourado-variacao-1));
+    color: var(--branco-puro);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -2161,7 +2213,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .back-to-top:hover {
-    background: linear-gradient(135deg, #D4B574, #C8A96E);
+    background: linear-gradient(135deg, var(--dourado-variacao-2), var(--dourado-principal));
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(200, 169, 110, 0.4);
 }
@@ -2171,15 +2223,15 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .back-to-top::before {
-    content: "↑";
+    content: "â†‘";
     font-size: 20px;
     line-height: 1;
 }
 
-/* Responsividade do botão */
+/* Responsividade do botÃ£o */
 @media (max-width: 768px) {
     .back-to-top {
-        bottom: 85px; /* Posicionado acima do botão WhatsApp em mobile */
+        bottom: 85px; /* Posicionado acima do botÃ£o WhatsApp em mobile */
         right: 20px;
         width: 45px;
         height: 45px;
@@ -2193,7 +2245,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 
 @media (max-width: 480px) {
     .back-to-top {
-        bottom: 80px; /* Posicionado acima do botão WhatsApp em telas pequenas */
+        bottom: 80px; /* Posicionado acima do botÃ£o WhatsApp em telas pequenas */
         right: 15px;
         width: 40px;
         height: 40px;
@@ -2207,7 +2259,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* ===== BOTÃO FLUTUANTE DO WHATSAPP ===== */
+/* ===== BOTÃƒO FLUTUANTE DO WHATSAPP ===== */
 
 .whatsapp-float {
     position: fixed;
@@ -2220,19 +2272,19 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .whatsapp-float.bottom-right {
-    bottom: 30px; /* Posição inferior - abaixo do botão "voltar ao topo" */
+    bottom: 30px; /* PosiÃ§Ã£o inferior - abaixo do botÃ£o "voltar ao topo" */
     right: 30px;
 }
 
 .whatsapp-float.bottom-left {
-    bottom: 30px; /* Posição inferior - abaixo do botão "voltar ao topo" */
+    bottom: 30px; /* PosiÃ§Ã£o inferior - abaixo do botÃ£o "voltar ao topo" */
     left: 30px;
 }
 
 .whatsapp-link {
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #25D366, #128C7E);
+    background: linear-gradient(135deg, var(--whatsapp), var(--whatsapp-escuro));
     color: white;
     text-decoration: none;
     padding: 12px 20px;
@@ -2246,7 +2298,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .whatsapp-link:hover {
-    background: linear-gradient(135deg, #128C7E, #25D366);
+    background: linear-gradient(135deg, var(--whatsapp-escuro), var(--whatsapp));
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
     color: white;
@@ -2254,7 +2306,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 }
 
 .whatsapp-link:focus {
-    outline: 2px solid #25D366;
+    outline: 2px solid var(--whatsapp);
     outline-offset: 2px;
 }
 
@@ -2281,7 +2333,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     max-width: 150px;
 }
 
-/* Animação de entrada */
+/* AnimaÃ§Ã£o de entrada */
 @keyframes whatsappFadeIn {
     0% {
         opacity: 0;
@@ -2295,7 +2347,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* Animação de pulso sutil */
+/* AnimaÃ§Ã£o de pulso sutil */
 @keyframes whatsappPulse {
     0%, 100% {
         transform: scale(1);
@@ -2312,12 +2364,12 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 /* Responsividade */
 @media (max-width: 768px) {
     .whatsapp-float.bottom-right {
-        bottom: 20px; /* Posição inferior em mobile */
+        bottom: 20px; /* PosiÃ§Ã£o inferior em mobile */
         right: 20px;
     }
     
     .whatsapp-float.bottom-left {
-        bottom: 20px; /* Posição inferior em mobile */
+        bottom: 20px; /* PosiÃ§Ã£o inferior em mobile */
         left: 20px;
     }
     
@@ -2341,7 +2393,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
 @media (max-width: 480px) {
     .whatsapp-float.bottom-right,
     .whatsapp-float.bottom-left {
-        bottom: 15px; /* Posição inferior em telas pequenas */
+        bottom: 15px; /* PosiÃ§Ã£o inferior em telas pequenas */
         right: 15px;
         left: auto;
     }
@@ -2365,7 +2417,7 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* Versão compacta para telas muito pequenas */
+/* VersÃ£o compacta para telas muito pequenas */
 @media (max-width: 360px) {
     .whatsapp-link {
         padding: 10px;
@@ -2398,4 +2450,4 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* Forçar atualização do tema - versão 1.0.3 */
+/* ForÃ§ar atualizaÃ§Ã£o do tema - versÃ£o 1.0.3 */
