@@ -498,5 +498,351 @@ function mbo_advocacia_customize_register($wp_customize) {
         'section' => 'mbo_homepage_section',
         'type'    => 'text',
     ));
+
+    // === SEÇÃO SOBRE ===
+    
+    // Seção Sobre no Customizer
+    $wp_customize->add_section('mbo_about_section', array(
+        'title'    => __('Seção Sobre', 'mbo-advocacia'),
+        'priority' => 31,
+    ));
+
+    // Título da Seção Sobre
+    $wp_customize->add_setting('mbo_about_title', array(
+        'default'           => 'Sobre a Dra. Marília',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_about_title', array(
+        'label'   => __('Título da Seção Sobre', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    // Descrição da Seção Sobre
+    $wp_customize->add_setting('mbo_about_description', array(
+        'default'           => 'Profissional dedicada com mais de 15 anos de experiência em Direito da Saúde, oferecendo soluções jurídicas especializadas em Minas Gerais.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_about_description', array(
+        'label'   => __('Descrição da Seção Sobre', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'textarea',
+    ));
+
+    // Tópico 1 - Experiência Comprovada
+    $wp_customize->add_setting('mbo_feature_1_title', array(
+        'default'           => 'Experiência Comprovada',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_feature_1_title', array(
+        'label'   => __('Tópico 1 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_feature_1_text', array(
+        'default'           => 'Mais de 15 anos atuando exclusivamente em Direito da Saúde, com centenas de casos bem-sucedidos.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_feature_1_text', array(
+        'label'   => __('Tópico 1 - Texto', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'textarea',
+    ));
+
+    // Tópico 2 - Atendimento Humanizado
+    $wp_customize->add_setting('mbo_feature_2_title', array(
+        'default'           => 'Atendimento Humanizado',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_feature_2_title', array(
+        'label'   => __('Tópico 2 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_feature_2_text', array(
+        'default'           => 'Compreendemos que questões de saúde são delicadas e oferecemos suporte completo aos nossos clientes.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_feature_2_text', array(
+        'label'   => __('Tópico 2 - Texto', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'textarea',
+    ));
+
+    // Tópico 3 - Atuação em MG
+    $wp_customize->add_setting('mbo_feature_3_title', array(
+        'default'           => 'Atuação em MG',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_feature_3_title', array(
+        'label'   => __('Tópico 3 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_feature_3_text', array(
+        'default'           => 'Conhecimento profundo da legislação e práticas jurídicas específicas de Minas Gerais.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_feature_3_text', array(
+        'label'   => __('Tópico 3 - Texto', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'textarea',
+    ));
+
+    // === CARD DE RESULTADOS ===
+
+    // Título do Card de Resultados
+    $wp_customize->add_setting('mbo_results_title', array(
+        'default'           => 'Resultados que Falam',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_results_title', array(
+        'label'   => __('Título do Card de Resultados', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    // Estatística 1
+    $wp_customize->add_setting('mbo_stat_1_number', array(
+        'default'           => '15+',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_1_number', array(
+        'label'   => __('Estatística 1 - Número', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_stat_1_label', array(
+        'default'           => 'Anos de Experiência',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_1_label', array(
+        'label'   => __('Estatística 1 - Rótulo', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    // Estatística 2
+    $wp_customize->add_setting('mbo_stat_2_number', array(
+        'default'           => '500+',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_2_number', array(
+        'label'   => __('Estatística 2 - Número', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_stat_2_label', array(
+        'default'           => 'Casos Resolvidos',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_2_label', array(
+        'label'   => __('Estatística 2 - Rótulo', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    // Estatística 3
+    $wp_customize->add_setting('mbo_stat_3_number', array(
+        'default'           => '95%',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_3_number', array(
+        'label'   => __('Estatística 3 - Número', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_stat_3_label', array(
+        'default'           => 'Taxa de Sucesso',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_3_label', array(
+        'label'   => __('Estatística 3 - Rótulo', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    // Estatística 4
+    $wp_customize->add_setting('mbo_stat_4_number', array(
+        'default'           => '24h',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_4_number', array(
+        'label'   => __('Estatística 4 - Número', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_stat_4_label', array(
+        'default'           => 'Resposta Média',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_stat_4_label', array(
+        'label'   => __('Estatística 4 - Rótulo', 'mbo-advocacia'),
+        'section' => 'mbo_about_section',
+        'type'    => 'text',
+    ));
+
+    // === SEÇÃO ÁREAS DE ATUAÇÃO ===
+    $wp_customize->add_section('mbo_atuacao_section', array(
+        'title'    => __('Áreas de Atuação', 'mbo-advocacia'),
+        'priority' => 32,
+    ));
+
+    // Título
+    $wp_customize->add_setting('mbo_atuacao_title', array(
+        'default'           => 'Áreas de Atuação',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_atuacao_title', array(
+        'label'   => __('Título da Seção', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    // Texto
+    $wp_customize->add_setting('mbo_atuacao_text', array(
+        'default'           => 'Especialização completa em Direito da Saúde com foco em resultados práticos e efetivos.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_atuacao_text', array(
+        'label'   => __('Texto da Seção', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
+
+    // === CARDS DE SERVIÇOS ===
+    
+    // Card 1 - Planos de Saúde
+    $wp_customize->add_setting('mbo_service_1_title', array(
+        'default'           => 'Planos de Saúde',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_service_1_title', array(
+        'label'   => __('Card 1 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_service_1_description', array(
+        'default'           => 'Negativa de cobertura, reembolsos, autorização de procedimentos e cirurgias.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_service_1_description', array(
+        'label'   => __('Card 1 - Descrição', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
+
+    // Card 2 - Erro Médico
+    $wp_customize->add_setting('mbo_service_2_title', array(
+        'default'           => 'Erro Médico',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_service_2_title', array(
+        'label'   => __('Card 2 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_service_2_description', array(
+        'default'           => 'Responsabilidade civil por negligência, imperícia ou imprudência médica.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_service_2_description', array(
+        'label'   => __('Card 2 - Descrição', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
+
+    // Card 3 - Direito do Paciente
+    $wp_customize->add_setting('mbo_service_3_title', array(
+        'default'           => 'Direito do Paciente',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_service_3_title', array(
+        'label'   => __('Card 3 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_service_3_description', array(
+        'default'           => 'Defesa dos direitos fundamentais do paciente e acesso à saúde de qualidade.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_service_3_description', array(
+        'label'   => __('Card 3 - Descrição', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
+
+    // Card 4 - Judicialização da Saúde
+    $wp_customize->add_setting('mbo_service_4_title', array(
+        'default'           => 'Judicialização da Saúde',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_service_4_title', array(
+        'label'   => __('Card 4 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_service_4_description', array(
+        'default'           => 'Ações contra o SUS para garantir tratamentos e medicamentos essenciais.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_service_4_description', array(
+        'label'   => __('Card 4 - Descrição', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
+
+    // Card 5 - Regulamentação
+    $wp_customize->add_setting('mbo_service_5_title', array(
+        'default'           => 'Regulamentação',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_service_5_title', array(
+        'label'   => __('Card 5 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_service_5_description', array(
+        'default'           => 'Consultoria em regulamentação sanitária e compliance para profissionais da saúde.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_service_5_description', array(
+        'label'   => __('Card 5 - Descrição', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
+
+    // Card 6 - Consultoria Preventiva
+    $wp_customize->add_setting('mbo_service_6_title', array(
+        'default'           => 'Consultoria Preventiva',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_service_6_title', array(
+        'label'   => __('Card 6 - Título', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('mbo_service_6_description', array(
+        'default'           => 'Orientação jurídica preventiva para evitar problemas futuros na área da saúde.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_service_6_description', array(
+        'label'   => __('Card 6 - Descrição', 'mbo-advocacia'),
+        'section' => 'mbo_atuacao_section',
+        'type'    => 'textarea',
+    ));
 }
 add_action('customize_register', 'mbo_advocacia_customize_register');
