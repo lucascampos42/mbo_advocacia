@@ -157,6 +157,9 @@ function mbo_advocacia_scripts() {
     // Script principal do tema
     wp_enqueue_script('mbo-advocacia-script', get_template_directory_uri() . '/assets/js/main.js', array('jquery', 'bootstrap-js'), '1.0.1', true);
 
+    // Script de rolagem suave
+    wp_enqueue_script('mbo-advocacia-smooth-scroll', get_template_directory_uri() . '/assets/js/smooth-scroll.js', array('mbo-advocacia-script'), '1.0.0', true);
+
     // Script para comentários
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -310,3 +313,190 @@ function mbo_advocacia_contact_info() {
     }
     echo '</div>';
 }
+
+/**
+ * Menu fallback se nenhum menu for definido
+ */
+function mbo_advocacia_fallback_menu() {
+    echo '<ul id="primary-menu" class="nav-menu">';
+    echo '<li><a href="' . esc_url(home_url('/')) . '">' . esc_html__('Início', 'mbo-advocacia') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/sobre')) . '">' . esc_html__('Sobre', 'mbo-advocacia') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/servicos')) . '">' . esc_html__('Serviços', 'mbo-advocacia') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/blog')) . '">' . esc_html__('Blog', 'mbo-advocacia') . '</a></li>';
+    echo '<li><a href="' . esc_url(home_url('/contato')) . '">' . esc_html__('Contato', 'mbo-advocacia') . '</a></li>';
+    echo '</ul>';
+}
+
+/**
+ * Class Name: bootstrap_5_wp_nav_menu_walker
+ * Description: A custom WordPress nav walker class for Bootstrap 5.
+ * Version: 1.0.0
+ * Author: AlexWebLab
+ * Author URI: https://alexweblab.com
+ * License: MIT
+ */
+class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_Menu
+{
+    private $current_item;
+    private $dropdown_menu_alignment_values = [
+        'dropdown-menu-start',
+        'dropdown-menu-end',
+        'dropdown-menu-sm-start',
+        'dropdown-menu-sm-end',
+        'dropdown-menu-md-start',
+        'dropdown-menu-md-end',
+        'dropdown-menu-lg-start',
+        'dropdown-menu-lg-end',
+        'dropdown-menu-xl-start',
+        'dropdown-menu-xl-end',
+        'dropdown-menu-xxl-start',
+        'dropdown-menu-xxl-end'
+    ];
+
+    function start_lvl(&$output, $depth = 0, $args = null)
+    {
+        $dropdown_menu_classes[] = '';
+        foreach($this->current_item->classes as $class) {
+            if(in_array($class, $this->dropdown_menu_alignment_values)) {
+                $dropdown_menu_classes[] = $class;
+            }
+        }
+        $indent = str_repeat("\t", $depth);
+        $output .= "\n" . $indent . '<ul class="dropdown-menu ' . esc_attr(implode(" ", $dropdown_menu_classes)) . '">' . "\n";
+    }
+
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
+    {
+        $this->current_item = $item;
+
+        $indent = ($depth) ? str_repeat("\t", $depth) : '';
+
+        $li_attributes = '';
+        $class_names = $value = '';
+
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+
+        $classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
+
+        $classes[] = 'menu-item-' . $item->ID;
+
+        if ($depth == 0) {
+            $classes[] = 'nav-item';
+        }
+
+        if ($depth > 0) {
+            $classes[] = 'dropdown-menu-item';
+        }
+
+        if( in_array('menu-item-has-children', $classes) ) {
+            $classes[] = 'dropdown';
+        }
+
+        if( in_array('current-menu-item', $classes) ) {
+            $classes[] = 'active';
+        }
+
+        $class_names =  join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+        $class_names = ' class="' . esc_attr($class_names) . '"';
+
+        $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
+        $id = strlen($id) ? ' id="' . esc_attr($id) . '"' : '';
+
+        $output .= $indent . '<li ' . $id . $value . $class_names . $li_attributes . '>';
+
+        $attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+        $attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+        $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+        $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+
+        $active_class = ($item->current || $item->current_item_ancestor) ? 'active' : '';
+        $nav_link_class = ( $depth == 0 ) ? 'nav-link' : 'dropdown-item';
+        $attributes .= (in_array('menu-item-has-children', $item->classes)) ? ' class="'. $nav_link_class .' ' . $active_class . ' dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"' : ' class="'. $nav_link_class .' ' . $active_class . '"';
+
+        $item_output = $args->before;
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
+        $item_output .= '</a>';
+        $item_output .= $args->after;
+
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    }
+}
+
+/**
+ * Customizer - Campos personalizados para página inicial
+ */
+function mbo_advocacia_customize_register($wp_customize) {
+    // Seção da Página Inicial
+    $wp_customize->add_section('mbo_homepage_section', array(
+        'title'    => __('Página Inicial', 'mbo-advocacia'),
+        'priority' => 30,
+    ));
+
+    // Card de Experiência
+    $wp_customize->add_setting('mbo_experience_text', array(
+        'default'           => 'Mais de 15 anos de experiência',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_experience_text', array(
+        'label'   => __('Texto do Card de Experiência', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'text',
+    ));
+
+    // Nome da Advogada
+    $wp_customize->add_setting('mbo_lawyer_name', array(
+        'default'           => 'Dra. Marília Bueno Osório',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_lawyer_name', array(
+        'label'   => __('Nome da Advogada (H1)', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'text',
+    ));
+
+    // Especialidade
+    $wp_customize->add_setting('mbo_specialty', array(
+        'default'           => 'Especialista em Direito da Saúde',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_specialty', array(
+        'label'   => __('Especialidade (H2)', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'text',
+    ));
+
+    // Descrição
+    $wp_customize->add_setting('mbo_description', array(
+        'default'           => 'Advocacia especializada com foco na defesa dos seus direitos na área da saúde. Experiência sólida em Minas Gerais com atendimento personalizado e resultados efetivos.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_description', array(
+        'label'   => __('Descrição (Parágrafo)', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'textarea',
+    ));
+
+    // Texto do Botão Primário
+    $wp_customize->add_setting('mbo_primary_button_text', array(
+        'default'           => 'Consulta Gratuita',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_primary_button_text', array(
+        'label'   => __('Texto do Botão Primário', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'text',
+    ));
+
+    // Texto do Botão Secundário
+    $wp_customize->add_setting('mbo_secondary_button_text', array(
+        'default'           => 'Fale Conosco',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_secondary_button_text', array(
+        'label'   => __('Texto do Botão Secundário', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+        'type'    => 'text',
+    ));
+}
+add_action('customize_register', 'mbo_advocacia_customize_register');
