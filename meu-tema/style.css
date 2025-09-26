@@ -66,6 +66,23 @@ body {
     margin-top: 0.5rem;
 }
 
+/* Logo */
+.site-logo {
+    max-height: 60px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.site-logo:hover {
+    transform: scale(1.05);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+}
+
 /* Navegação */
 .main-navigation {
     background-color: #2E2E2E;
