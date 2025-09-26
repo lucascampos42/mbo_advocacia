@@ -552,6 +552,71 @@ function mbo_advocacia_customize_register($wp_customize) {
         'type'        => 'url',
     ));
 
+    // === PERSONALIZAÇÃO DE FUNDO ===
+    
+    // Imagem de Fundo
+    $wp_customize->add_setting('mbo_hero_background_image', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'mbo_hero_background_image', array(
+        'label'       => __('Imagem de Fundo do Cabeçalho', 'mbo-advocacia'),
+        'description' => __('Selecione uma imagem para usar como fundo do cabeçalho da página inicial', 'mbo-advocacia'),
+        'section'     => 'mbo_homepage_section',
+        'settings'    => 'mbo_hero_background_image',
+    )));
+
+    // Ativar/Desativar Camada de Cor
+    $wp_customize->add_setting('mbo_hero_overlay_enable', array(
+        'default'           => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+    $wp_customize->add_control('mbo_hero_overlay_enable', array(
+        'label'       => __('Ativar Camada de Cor sobre a Imagem', 'mbo-advocacia'),
+        'description' => __('Adiciona uma camada de cor sobre a imagem de fundo para melhorar a legibilidade', 'mbo-advocacia'),
+        'section'     => 'mbo_homepage_section',
+        'type'        => 'checkbox',
+    ));
+
+    // Cor da Camada
+    $wp_customize->add_setting('mbo_hero_overlay_color', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'mbo_hero_overlay_color', array(
+        'label'   => __('Cor da Camada', 'mbo-advocacia'),
+        'section' => 'mbo_homepage_section',
+    )));
+
+    // Transparência da Camada (0-100)
+    $wp_customize->add_setting('mbo_hero_overlay_opacity', array(
+        'default'           => 50,
+        'sanitize_callback' => 'absint',
+    ));
+    $wp_customize->add_control('mbo_hero_overlay_opacity', array(
+        'label'       => __('Transparência da Camada (%)', 'mbo-advocacia'),
+        'description' => __('0 = Transparente, 100 = Opaco', 'mbo-advocacia'),
+        'section'     => 'mbo_homepage_section',
+        'type'        => 'range',
+        'input_attrs' => array(
+            'min'  => 0,
+            'max'  => 100,
+            'step' => 5,
+        ),
+    ));
+
+    // CSS Personalizado para o Cabeçalho
+    $wp_customize->add_setting('mbo_hero_custom_css', array(
+        'default'           => '',
+        'sanitize_callback' => 'wp_strip_all_tags',
+    ));
+    $wp_customize->add_control('mbo_hero_custom_css', array(
+        'label'       => __('CSS Personalizado do Cabeçalho', 'mbo-advocacia'),
+        'description' => __('Adicione CSS personalizado para o cabeçalho da página inicial (apenas propriedades CSS, sem seletores)', 'mbo-advocacia'),
+        'section'     => 'mbo_homepage_section',
+        'type'        => 'textarea',
+    ));
+
     // === SEÇÃO SOBRE ===
     
     // Seção Sobre no Customizer

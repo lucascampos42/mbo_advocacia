@@ -4,8 +4,38 @@
 <main id="primary" class="site-main">
     
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
+    <section class="hero-section" style="<?php 
+        $hero_styles = array();
+        
+        // Imagem de fundo
+        $bg_image = get_theme_mod('mbo_hero_background_image', '');
+        if (!empty($bg_image)) {
+            $hero_styles[] = 'background-image: url(' . esc_url($bg_image) . ')';
+            $hero_styles[] = 'background-size: cover';
+            $hero_styles[] = 'background-position: center';
+            $hero_styles[] = 'background-repeat: no-repeat';
+        }
+        
+        // CSS personalizado
+        $custom_css = get_theme_mod('mbo_hero_custom_css', '');
+        if (!empty($custom_css)) {
+            $hero_styles[] = wp_strip_all_tags($custom_css);
+        }
+        
+        echo implode('; ', $hero_styles);
+    ?>"><?php 
+        // Camada de cor sobre a imagem
+        $overlay_enabled = get_theme_mod('mbo_hero_overlay_enable', false);
+        $bg_image = get_theme_mod('mbo_hero_background_image', '');
+        if ($overlay_enabled && !empty($bg_image)) {
+            $overlay_color = get_theme_mod('mbo_hero_overlay_color', '#000000');
+            $overlay_opacity = get_theme_mod('mbo_hero_overlay_opacity', 50);
+            $rgba_color = sscanf($overlay_color, "#%02x%02x%02x");
+            $rgba = 'rgba(' . implode(',', $rgba_color) . ',' . ($overlay_opacity / 100) . ')';
+            echo '<div class="hero-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: ' . $rgba . '; z-index: 1;"></div>';
+        }
+     ?>
+        <div class="container" style="position: relative; z-index: 2;">
             
             <!-- Card de Experiência -->
             <div class="experience-card">
