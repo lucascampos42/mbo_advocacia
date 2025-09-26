@@ -32,3 +32,63 @@
         transform: translateY(0);
     }
 }
+
+/* Estilos do Rodapé */
+.footer-widget-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Título H4 do rodapé - padrão consistente para todos */
+.footer-widget h4.widget-title {
+    color: #C8A96E;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Centralização para todos os widgets do rodapé */
+.footer-widget {
+    text-align: center;
+}
+
+.footer-widget ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-widget ul li {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer-widget p {
+    text-align: center;
+}
+
+.footer-logo-subtitle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espaço entre o logo e o texto */
+    width: 100%;
+}
+
+.footer-logo-subtitle-wrapper .footer-logo {
+    height: 120px; /* Dobra o tamanho do logo (60px * 2) */
+    width: auto;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    display: block;
+}
+
+.footer-logo-subtitle-wrapper .footer-subtitle {
+    margin-bottom: 0; /* Remove a margem inferior do subtítulo */
+}

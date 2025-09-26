@@ -844,5 +844,161 @@ function mbo_advocacia_customize_register($wp_customize) {
         'section' => 'mbo_atuacao_section',
         'type'    => 'textarea',
     ));
+
+    // Seção de Contato
+    $wp_customize->add_section('mbo_contact_section', array(
+        'title'    => __('Informações de Contato', 'mbo-advocacia'),
+        'priority' => 35,
+    ));
+
+    // Telefone
+    $wp_customize->add_setting('mbo_contact_phone', array(
+        'default'           => '(31) 9999-9999',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_contact_phone', array(
+        'label'   => __('Telefone', 'mbo-advocacia'),
+        'section' => 'mbo_contact_section',
+        'type'    => 'text',
+    ));
+
+    // E-mail
+    $wp_customize->add_setting('mbo_contact_email', array(
+        'default'           => 'contato@mboadvocacia.com.br',
+        'sanitize_callback' => 'sanitize_email',
+    ));
+    $wp_customize->add_control('mbo_contact_email', array(
+        'label'   => __('E-mail', 'mbo-advocacia'),
+        'section' => 'mbo_contact_section',
+        'type'    => 'email',
+    ));
+
+    // Localização
+    $wp_customize->add_setting('mbo_contact_location', array(
+        'default'           => 'Belo Horizonte - MG',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_contact_location', array(
+        'label'   => __('Localização', 'mbo-advocacia'),
+        'section' => 'mbo_contact_section',
+        'type'    => 'text',
+    ));
+
+    // Horário de Atendimento
+    $wp_customize->add_setting('mbo_contact_hours', array(
+        'default'           => 'Segunda a Sexta: 8h às 18h',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_contact_hours', array(
+        'label'   => __('Horário de Atendimento', 'mbo-advocacia'),
+        'section' => 'mbo_contact_section',
+        'type'    => 'text',
+    ));
+
+    // Google Maps Embed URL
+    $wp_customize->add_setting('mbo_google_maps_url', array(
+        'default'           => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.8984!2d-43.9378!3d-19.9167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU1JzAwLjEiUyA0M8KwNTYnMTYuMSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890123',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control('mbo_google_maps_url', array(
+        'label'       => __('URL do Google Maps (Embed)', 'mbo-advocacia'),
+        'description' => __('Cole aqui a URL de incorporação do Google Maps', 'mbo-advocacia'),
+        'section'     => 'mbo_contact_section',
+        'type'        => 'url',
+    ));
+
+    // === SEÇÃO DO RODAPÉ ===
+    $wp_customize->add_section('mbo_footer_section', array(
+        'title'    => __('Configurações do Rodapé', 'mbo-advocacia'),
+        'priority' => 40,
+    ));
+
+    // Nome do Site no Rodapé
+    $wp_customize->add_setting('mbo_footer_site_name', array(
+        'default'           => 'MBO Advocacia',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_footer_site_name', array(
+        'label'   => __('Nome do Site', 'mbo-advocacia'),
+        'section' => 'mbo_footer_section',
+        'type'    => 'text',
+    ));
+
+    // Logo do Rodapé
+    $wp_customize->add_setting('mbo_footer_logo', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'mbo_footer_logo', array(
+        'label'       => __('Logo do Rodapé', 'mbo-advocacia'),
+        'description' => __('Faça upload da logo que aparecerá no rodapé', 'mbo-advocacia'),
+        'section'     => 'mbo_footer_section',
+    )));
+
+    // Legenda do Site no Rodapé
+    $wp_customize->add_setting('mbo_footer_tagline', array(
+        'default'           => 'Direito da Saúde',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('mbo_footer_tagline', array(
+        'label'   => __('Legenda do Site', 'mbo-advocacia'),
+        'section' => 'mbo_footer_section',
+        'type'    => 'text',
+    ));
+
+    // Descrição do Site no Rodapé
+    $wp_customize->add_setting('mbo_footer_description', array(
+        'default'           => 'Especialistas em Direito da Saúde com mais de 15 anos de experiência em Minas Gerais.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('mbo_footer_description', array(
+        'label'   => __('Descrição do Site', 'mbo-advocacia'),
+        'section' => 'mbo_footer_section',
+        'type'    => 'textarea',
+    ));
 }
 add_action('customize_register', 'mbo_advocacia_customize_register');
+
+/**
+ * Processamento do formulário de contato
+ */
+function mbo_process_contact_form() {
+    if (isset($_POST['submit_contact']) && wp_verify_nonce($_POST['mbo_contact_nonce'], 'mbo_contact_form')) {
+        $name = sanitize_text_field($_POST['contact_name']);
+        $email = sanitize_email($_POST['contact_email']);
+        $phone = sanitize_text_field($_POST['contact_phone']);
+        $subject = sanitize_text_field($_POST['contact_subject']);
+        $message = sanitize_textarea_field($_POST['contact_message']);
+        
+        // Validação básica
+        if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+            wp_die('Por favor, preencha todos os campos obrigatórios.');
+        }
+        
+        // Preparar e-mail
+        $to = get_theme_mod('mbo_contact_email', 'contato@mboadvocacia.com.br');
+        $email_subject = 'Novo contato do site: ' . $subject;
+        $email_message = "Nome: $name\n";
+        $email_message .= "E-mail: $email\n";
+        $email_message .= "Telefone: $phone\n";
+        $email_message .= "Assunto: $subject\n\n";
+        $email_message .= "Mensagem:\n$message";
+        
+        $headers = array(
+            'Content-Type: text/plain; charset=UTF-8',
+            'From: ' . get_bloginfo('name') . ' <noreply@' . $_SERVER['HTTP_HOST'] . '>',
+            'Reply-To: ' . $name . ' <' . $email . '>'
+        );
+        
+        // Enviar e-mail
+        if (wp_mail($to, $email_subject, $email_message, $headers)) {
+            wp_redirect(add_query_arg('contact', 'success', home_url('/#contato')));
+        } else {
+            wp_redirect(add_query_arg('contact', 'error', home_url('/#contato')));
+        }
+        exit;
+    }
+}
+add_action('init', 'mbo_process_contact_form');
+
+// Forçar atualização do tema - versão 1.0.3

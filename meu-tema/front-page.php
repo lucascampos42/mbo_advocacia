@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+<!-- Atualização dos ícones SVG - versão 1.0.3 -->
 
 <main id="primary" class="site-main">
     
@@ -180,9 +181,8 @@
                 <!-- Card 1: Planos de Saúde -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9 9H15M9 13H15M9 17H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                         </svg>
                     </div>
                     <h3 class="service-title">
@@ -196,8 +196,8 @@
                 <!-- Card 2: Erro Médico -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 12H18L15 21L9 3L6 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                         </svg>
                     </div>
                     <h3 class="service-title">
@@ -211,11 +211,11 @@
                 <!-- Card 3: Direito do Paciente -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M23 21V19C23 18.1332 22.7361 17.2863 22.2416 16.5555C21.747 15.8248 21.0421 15.2426 20.2175 14.8717" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 18.9078 6.11683 18.7176 6.95013C18.5274 7.78343 18.0644 8.53234 17.4021 9.06558C16.7398 9.59882 15.9129 9.88823 15.06 9.88823" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
                         </svg>
                     </div>
                     <h3 class="service-title">
@@ -229,10 +229,12 @@
                 <!-- Card 4: Judicialização da Saúde -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7L12 13L3 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M7 3H17L21 7H3L7 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m14.5 12.5-8 8a2.119 2.119 0 1 1-3-3l8-8"></path>
+                            <path d="m16 16 6-6"></path>
+                            <path d="m8 8 6-6"></path>
+                            <path d="m9 7 8 8"></path>
+                            <path d="m21 11-8-8"></path>
                         </svg>
                     </div>
                     <h3 class="service-title">
@@ -246,10 +248,9 @@
                 <!-- Card 5: Regulamentação -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 7v14"></path>
+                            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
                         </svg>
                     </div>
                     <h3 class="service-title">
@@ -263,10 +264,8 @@
                 <!-- Card 6: Consultoria Preventiva -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9.09 9C9.3251 8.33167 9.78915 7.76811 10.4 7.40913C11.0108 7.05016 11.7289 6.91894 12.4272 7.03871C13.1255 7.15849 13.7588 7.52152 14.2151 8.06353C14.6713 8.60553 14.9211 9.29152 14.92 10C14.92 12 11.92 13 11.92 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 17H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
                         </svg>
                     </div>
                     <h3 class="service-title">
@@ -280,10 +279,253 @@
         </div>
     </section>
 
-    <section id="contato" class="py-5">
+    <!-- Seção de Contato -->
+    <section id="contato" class="contact-section">
         <div class="container">
-            <h2>Contato</h2>
-            <p>Adicione aqui as informações de contato ou um formulário. Você pode editar este texto no arquivo front-page.php.</p>
+            <div class="contact-header">
+                <h2 class="section-title">Entre em Contato</h2>
+                <p class="section-subtitle">Agende sua consulta gratuita e descubra como podemos ajudar você.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Informações de Contato</h3>
+                    <p>Entre em contato conosco através dos canais abaixo ou preencha o formulário.</p>
+                    
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Telefone</h4>
+                                <p><?php echo esc_html(get_theme_mod('mbo_contact_phone', '(31) 9999-9999')); ?></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h4>E-mail</h4>
+                                <p><?php echo esc_html(get_theme_mod('mbo_contact_email', 'contato@mboadvocacia.com.br')); ?></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                                    <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Horário de Atendimento</h4>
+                                <p><?php echo esc_html(get_theme_mod('mbo_contact_hours', 'Segunda a Sexta: 8h às 18h')); ?></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Localização</h4>
+                                <p><?php echo esc_html(get_theme_mod('mbo_contact_location', 'Belo Horizonte - MG')); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Maps -->
+                    <div class="contact-map">
+                        <iframe 
+                            src="<?php echo esc_url(get_theme_mod('mbo_google_maps_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3751.8984!2d-43.9378!3d-19.9167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU1JzAwLjEiUyA0M8KwNTYnMTYuMSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890123')); ?>"
+                            width="100%" 
+                            height="250" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Envie sua Mensagem</h3>
+                    <p>Preencha o formulário abaixo e entraremos em contato em breve.</p>
+                    
+                    <form class="contact-form-wrapper" method="post" action="">
+                        <?php wp_nonce_field('mbo_contact_form', 'mbo_contact_nonce'); ?>
+                        
+                        <div class="form-group">
+                            <label for="contact-name">Nome Completo</label>
+                            <input type="text" id="contact-name" name="contact_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email">E-mail</label>
+                            <input type="email" id="contact-email" name="contact_email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-phone">Telefone</label>
+                            <input type="tel" id="contact-phone" name="contact_phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-subject">Assunto</label>
+                            <select id="contact-subject" name="contact_subject" required>
+                                <option value="">Selecione um assunto</option>
+                                <option value="planos-saude">Planos de Saúde</option>
+                                <option value="direito-medico">Direito Médico</option>
+                                <option value="direito-consumidor">Direito do Consumidor</option>
+                                <option value="consultoria">Consultoria Jurídica</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-message">Mensagem</label>
+                            <textarea id="contact-message" name="contact_message" rows="5" required placeholder="Descreva sua situação ou dúvida..."></textarea>
+                        </div>
+                        
+                        <button type="submit" name="submit_contact" class="btn-submit">
+                            Enviar Mensagem
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Últimas Notícias -->
+    <section class="news-section">
+        <div class="container">
+            <div class="news-header">
+                <h2 class="section-title">Últimas Notícias</h2>
+                <p class="section-subtitle">Fique por dentro das novidades do Direito da Saúde</p>
+            </div>
+            
+            <div class="news-grid">
+                <?php
+                $recent_posts = wp_get_recent_posts(array(
+                    'numberposts' => 3,
+                    'post_status' => 'publish'
+                ));
+                
+                if (!empty($recent_posts)) :
+                    foreach ($recent_posts as $post) :
+                        $post_id = $post['ID'];
+                        $post_title = $post['post_title'];
+                        $post_excerpt = wp_trim_words($post['post_content'], 20, '...');
+                        $post_date = date('d/m/Y', strtotime($post['post_date']));
+                        $post_url = get_permalink($post_id);
+                        $post_thumbnail = get_the_post_thumbnail_url($post_id, 'medium');
+                ?>
+                <article class="news-card">
+                    <?php if ($post_thumbnail) : ?>
+                    <div class="news-image">
+                        <img src="<?php echo esc_url($post_thumbnail); ?>" alt="<?php echo esc_attr($post_title); ?>">
+                    </div>
+                    <?php else : ?>
+                    <div class="news-image news-placeholder">
+                        <div class="placeholder-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><?php echo esc_html($post_date); ?></span>
+                        </div>
+                        <h3 class="news-title">
+                            <a href="<?php echo esc_url($post_url); ?>"><?php echo esc_html($post_title); ?></a>
+                        </h3>
+                        <p class="news-excerpt"><?php echo esc_html($post_excerpt); ?></p>
+                        <a href="<?php echo esc_url($post_url); ?>" class="news-link">
+                            Leia mais
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <?php 
+                    endforeach;
+                else : 
+                    // Dados de exemplo quando não há posts publicados
+                    $example_news = array(
+                        array(
+                            'title' => 'Novos Direitos dos Pacientes em Planos de Saúde',
+                            'excerpt' => 'Entenda as mudanças na legislação que ampliam os direitos dos beneficiários de planos de saúde e como isso impacta seu atendimento médico.',
+                            'date' => date('d/m/Y'),
+                            'image' => false
+                        ),
+                        array(
+                            'title' => 'STJ Define Critérios para Cobertura de Tratamentos',
+                            'excerpt' => 'Superior Tribunal de Justiça estabelece novos parâmetros para obrigatoriedade de cobertura de procedimentos médicos pelos planos de saúde.',
+                            'date' => date('d/m/Y', strtotime('-3 days')),
+                            'image' => false
+                        ),
+                        array(
+                            'title' => 'Direito à Saúde: Avanços na Jurisprudência',
+                            'excerpt' => 'Análise das principais decisões judiciais recentes que fortalecem o direito fundamental à saúde no Brasil.',
+                            'date' => date('d/m/Y', strtotime('-7 days')),
+                            'image' => false
+                        )
+                    );
+                    
+                    foreach ($example_news as $news) :
+                ?>
+                <article class="news-card">
+                    <div class="news-image news-placeholder">
+                        <div class="placeholder-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date"><?php echo esc_html($news['date']); ?></span>
+                        </div>
+                        <h3 class="news-title">
+                            <a href="#" onclick="return false;"><?php echo esc_html($news['title']); ?></a>
+                        </h3>
+                        <p class="news-excerpt"><?php echo esc_html($news['excerpt']); ?></p>
+                        <a href="#" onclick="return false;" class="news-link">
+                            Leia mais
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <?php 
+                    endforeach;
+                endif; ?>
+            </div>
+            
+            <div class="news-footer">
+                <a href="<?php echo get_permalink(get_option('page_for_posts')); ?>" class="btn-view-all">
+                    Ver Todas as Notícias
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </section>
 

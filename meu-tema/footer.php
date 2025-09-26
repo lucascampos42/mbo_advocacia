@@ -23,52 +23,89 @@
                     </div>
                 </div><!-- .footer-widgets -->
             <?php else : ?>
-                <!-- Conteúdo padrão do rodapé se não houver widgets -->
-                <div class="footer-default-content">
-                    <div class="footer-widget-area">
-                        <div class="footer-widget footer-widget-1">
-                            <h4 class="widget-title"><?php esc_html_e('MBO Advocacia', 'mbo-advocacia'); ?></h4>
-                            <p><?php esc_html_e('Escritório especializado em direito empresarial, trabalhista e civil, oferecendo soluções jurídicas personalizadas para empresas e pessoas físicas.', 'mbo-advocacia'); ?></p>
-                            
-                            <div class="social-links">
-                                <a href="#" class="social-link" aria-label="Facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="social-link" aria-label="LinkedIn">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="social-link" aria-label="Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="social-link" aria-label="WhatsApp">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                            </div>
+                <!-- Conteúdo padrão do rodapé - Layout Horizontal -->
+                <div class="footer-widgets">
+                    <!-- Primeira Coluna: Logo e Nome do Site -->
+                    <div class="footer-widget footer-widget-1">
+                        <h4 class="widget-title"><?php echo esc_html(get_theme_mod('mbo_footer_site_name', 'MBO Advocacia')); ?></h4>
+                        <div class="footer-logo-subtitle-wrapper">
+                            <?php 
+                            $footer_logo = get_theme_mod('mbo_footer_logo');
+                            if ($footer_logo) : ?>
+                                <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_theme_mod('mbo_footer_site_name', 'MBO Advocacia')); ?>" class="footer-logo">
+                            <?php endif; ?>
+                            <h5 class="footer-subtitle"><?php echo esc_html(get_theme_mod('mbo_footer_tagline', 'Direito da Saúde')); ?></h5>
                         </div>
-                        
-                        <div class="footer-widget footer-widget-2">
-                            <h4 class="widget-title"><?php esc_html_e('Áreas de Atuação', 'mbo-advocacia'); ?></h4>
-                            <ul class="footer-menu">
-                                <li><a href="#"><?php esc_html_e('Direito Empresarial', 'mbo-advocacia'); ?></a></li>
-                                <li><a href="#"><?php esc_html_e('Direito Trabalhista', 'mbo-advocacia'); ?></a></li>
-                                <li><a href="#"><?php esc_html_e('Direito Civil', 'mbo-advocacia'); ?></a></li>
-                                <li><a href="#"><?php esc_html_e('Direito Tributário', 'mbo-advocacia'); ?></a></li>
-                                <li><a href="#"><?php esc_html_e('Consultoria Jurídica', 'mbo-advocacia'); ?></a></li>
-                            </ul>
-                        </div>
-                        
-                        <div class="footer-widget footer-widget-3">
-                            <h4 class="widget-title"><?php esc_html_e('Contato', 'mbo-advocacia'); ?></h4>
-                            <?php mbo_advocacia_contact_info(); ?>
-                            
-                            <div class="office-hours">
-                                <h5><?php esc_html_e('Horário de Atendimento', 'mbo-advocacia'); ?></h5>
-                                <p><?php esc_html_e('Segunda a Sexta: 8h às 18h', 'mbo-advocacia'); ?></p>
-                                <p><?php esc_html_e('Sábado: 8h às 12h', 'mbo-advocacia'); ?></p>
+                        <p><?php echo esc_html(get_theme_mod('mbo_footer_description', 'Especialistas em Direito da Saúde com mais de 15 anos de experiência em Minas Gerais.')); ?></p>
+                    </div>
+                    
+                    <!-- Segunda Coluna: Áreas de Atuação -->
+                    <div class="footer-widget footer-widget-2">
+                        <h4 class="widget-title">Áreas de Atuação</h4>
+                        <ul class="footer-menu">
+                            <li><a href="#">Planos de Saúde</a></li>
+                            <li><a href="#">Erro Médico</a></li>
+                            <li><a href="#">Direito do Paciente</a></li>
+                            <li><a href="#">Judicialização da Saúde</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Terceira Coluna: Informações de Contato -->
+                    <div class="footer-widget footer-widget-3">
+                        <h4 class="widget-title">Contato</h4>
+                        <div class="footer-contact">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span>Telefone:</span>
+                                        <a href="tel:<?php echo esc_attr(str_replace(['(', ')', ' ', '-'], '', get_theme_mod('mbo_contact_phone', '(31) 9999-9999'))); ?>"><?php echo esc_html(get_theme_mod('mbo_contact_phone', '(31) 9999-9999')); ?></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span>E-mail:</span>
+                                        <a href="mailto:<?php echo esc_attr(get_theme_mod('mbo_contact_email', 'contato@mboadvocacia.com.br')); ?>"><?php echo esc_html(get_theme_mod('mbo_contact_email', 'contato@mboadvocacia.com.br')); ?></a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                                            <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span>Horário:</span>
+                                        <span><?php echo esc_html(get_theme_mod('mbo_contact_hours', 'Segunda a Sexta: 8h às 18h')); ?></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="contact-details">
+                                        <span>Localização:</span>
+                                        <span><?php echo esc_html(get_theme_mod('mbo_contact_location', 'Belo Horizonte - MG')); ?></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!-- .footer-widgets -->
             <?php endif; ?>
             
             <!-- Menu do rodapé -->
@@ -88,22 +125,16 @@
             <div class="site-info">
                 <div class="copyright">
                     <p>
-                        &copy; <?php echo date('Y'); ?> 
-                        <a href="<?php echo esc_url(home_url('/')); ?>">
-                            <?php bloginfo('name'); ?>
-                        </a>
-                        <?php esc_html_e('- Todos os direitos reservados.', 'mbo-advocacia'); ?>
+                        &copy; <?php echo date('Y'); ?> MBO Advocacia - Dra. Marília Bueno Osório. Todos os direitos reservados.
                     </p>
                 </div>
                 
                 <div class="site-credits">
                     <p>
-                        <?php
-                        printf(
-                            esc_html__('Desenvolvido com %s WordPress', 'mbo-advocacia'),
-                            '<span class="heart" aria-label="amor">♥</span>'
-                        );
-                        ?>
+                        Desenvolvido por 
+                        <a href="https://codesdevs.com.br/" target="_blank" rel="noopener">Codesdevs</a> 
+                        e 
+                        <a href="https://www.cbtitech.com.br/" target="_blank" rel="noopener">cbtitech</a>
                     </p>
                 </div>
             </div><!-- .site-info -->
