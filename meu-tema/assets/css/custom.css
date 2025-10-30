@@ -1,4 +1,4 @@
-﻿/* Estilos Personalizados para o Tema MBO Advocacia */
+/* Estilos Personalizados para o Tema MBO Advocacia */
 
 .navbar {
     margin-bottom: 20px;
@@ -853,7 +853,9 @@
 
 .single-news .content-area {
     grid-template-columns: 1fr;
-    max-width: 800px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 
@@ -868,7 +870,7 @@
 }
 
 .post-categories {
-    padding: 20px 30px 0;
+    padding: 20px 60px 0;
 }
 
 .post-categories a {
@@ -883,7 +885,7 @@
 }
 
 .post-header {
-    padding: 20px 30px 30px;
+    padding: 20px 60px 30px;
     border-bottom: 1px solid var(--fundo-cinza-claro);
 }
 
@@ -920,7 +922,7 @@
 }
 
 .post-content {
-    padding: 40px 30px;
+    padding: 40px 60px;
     line-height: 1.8;
     font-size: 1.1rem;
 }
@@ -1185,8 +1187,20 @@
         font-size: 1rem;
     }
     
+    .post-header {
+        padding: 20px 20px 30px;
+    }
+    
+    .post-categories {
+        padding: 20px 20px 0;
+    }
+    
     .single-news {
         padding-top: 60px;
+    }
+    
+    .single-news .content-area {
+        padding: 0 15px;
     }
 
 }
