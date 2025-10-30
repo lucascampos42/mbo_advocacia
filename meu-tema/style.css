@@ -545,8 +545,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     position: relative;
     overflow: hidden;
     margin-top: 0;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
 }
 
+/* Padrão de textura apenas quando não há imagem de fundo */
 .hero-section::before {
     content: '';
     position: absolute;
@@ -556,6 +561,12 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23C9A64E" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23C9A64E" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
     opacity: 0.3;
+    z-index: 1;
+}
+
+/* Quando há imagem de fundo, remove a textura padrão */
+.hero-section[style*="background-image"]::before {
+    display: none;
 }
 
 .hero-section .container {
@@ -2181,10 +2192,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     }
 }
 
-/* BotÃ£o Flutuante Voltar ao Topo */
+/* Botão Flutuante Voltar ao Topo */
 .back-to-top {
     position: fixed;
-    bottom: 100px; /* Posicionado acima do botÃ£o WhatsApp */
+    bottom: 100px; /* Posicionado acima do botão WhatsApp */
     right: 30px;
     width: 50px;
     height: 50px;
@@ -2202,8 +2213,13 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    outline: none;
+}
+
+.back-to-top i {
+    font-size: 16px;
+    line-height: 1;
 }
 
 .back-to-top.visible {
@@ -2222,33 +2238,34 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     transform: translateY(0);
 }
 
-.back-to-top::before {
-    content: "â†‘";
-    font-size: 20px;
-    line-height: 1;
-}
+/* Removido pseudo-elemento para usar apenas o ícone Font Awesome */
 
-/* Responsividade do botÃ£o */
+/* Responsividade do botão */
 @media (max-width: 768px) {
     .back-to-top {
-        bottom: 85px; /* Posicionado acima do botÃ£o WhatsApp em mobile */
+        bottom: 85px; /* Posicionado acima do botão WhatsApp em mobile */
         right: 20px;
         width: 45px;
         height: 45px;
-        font-size: 16px;
+        font-size: 14px;
     }
     
-    .back-to-top::before {
-        font-size: 18px;
+    .back-to-top i {
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .back-to-top {
-        bottom: 80px; /* Posicionado acima do botÃ£o WhatsApp em telas pequenas */
+        bottom: 80px; /* Posicionado acima do botão WhatsApp em telas pequenas */
         right: 15px;
         width: 40px;
         height: 40px;
+        font-size: 12px;
+    }
+    
+    .back-to-top i {
+        font-size: 12px;
     }
 }
 
@@ -2256,6 +2273,8 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     .back-to-top {
         bottom: 75px; /* Ajuste para telas muito pequenas */
         right: 15px;
+        width: 38px;
+        height: 38px;
     }
 }
 
@@ -2265,10 +2284,10 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     position: fixed;
     z-index: 9999;
     transition: all 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.8);
-    animation: whatsappFadeIn 0.5s ease forwards 1s;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    animation: whatsappFadeIn 0.5s ease forwards;
 }
 
 .whatsapp-float.bottom-right {
@@ -2318,12 +2337,11 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="search"]:focus,
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
 }
 
-.whatsapp-icon svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
+.whatsapp-icon i {
+    color: currentColor;
 }
 
 .whatsapp-text {

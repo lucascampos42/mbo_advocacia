@@ -4,9 +4,15 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('WhatsApp script loaded');
     const whatsappButton = document.getElementById('whatsapp-link');
+    const whatsappFloat = document.getElementById('whatsapp-float');
+    
+    console.log('WhatsApp button element:', whatsappButton);
+    console.log('WhatsApp float element:', whatsappFloat);
     
     if (!whatsappButton) {
+        console.log('WhatsApp button not found!');
         return;
     }
 

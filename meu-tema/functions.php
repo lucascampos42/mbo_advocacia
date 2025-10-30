@@ -169,8 +169,8 @@ function mbo_advocacia_scripts() {
     }
 
     // Script do botão WhatsApp (se habilitado)
-    if (get_theme_mod('mbo_whatsapp_enable', false)) {
-        wp_enqueue_script('mbo-advocacia-whatsapp', get_template_directory_uri() . '/assets/js/whatsapp-button.js', array('jquery'), '1.0.0', true);
+    if (get_theme_mod('mbo_whatsapp_enable', true)) {
+        wp_enqueue_script('mbo-advocacia-whatsapp', get_template_directory_uri() . '/assets/js/whatsapp-button.js', array(), '1.0.1', true);
         
         // Passa as configurações do WhatsApp para o JavaScript
         wp_localize_script('mbo-advocacia-whatsapp', 'whatsappData', array(

@@ -35,10 +35,11 @@ if (isset($_GET['show_all_posts'])) {
         // Imagem de fundo
         $bg_image = get_theme_mod('mbo_hero_background_image', '');
         if (!empty($bg_image)) {
-            $hero_styles[] = 'background-image: url(' . esc_url($bg_image) . ')';
-            $hero_styles[] = 'background-size: cover';
-            $hero_styles[] = 'background-position: center';
-            $hero_styles[] = 'background-repeat: no-repeat';
+            $hero_styles[] = 'background-image: linear-gradient(rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.4)), url(' . esc_url($bg_image) . ') !important';
+            $hero_styles[] = 'background-size: cover !important';
+            $hero_styles[] = 'background-position: center center !important';
+            $hero_styles[] = 'background-repeat: no-repeat !important';
+            $hero_styles[] = 'background-attachment: scroll !important';
         }
         
         // CSS personalizado
